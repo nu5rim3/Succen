@@ -1,4 +1,5 @@
 import CaseAnalyticsChart from "@/components/CaseAnalyticsChart"
+import CaseTable from "@/components/CaseTable"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { ChevronDown } from "lucide-react"
@@ -75,7 +76,7 @@ const Dashboard = () => {
                     <CardTitle className="flex justify-between items-center">
                         <div>
                             <p className="text-gray-800 mb-2">Completed Cases</p>
-                            <p className="text-sm font-normal text-gray-600">Provide a monthly breakdown of total cases</p>
+                            <p className="text-lg font-normal text-gray-600">Provide a monthly breakdown of total cases</p>
                         </div>
 
                         <div className="flex gap-2">
@@ -90,6 +91,15 @@ const Dashboard = () => {
                     <CaseAnalyticsChart />
                 </CardContent>
             </Card>
+
+            <Card>
+                <CardHeader />
+
+                <CardContent>
+                    <CaseTable />
+                </CardContent>
+            </Card>
+
         </div>
     )
 }
