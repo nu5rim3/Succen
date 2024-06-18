@@ -10,7 +10,7 @@ const Dashboard = () => {
                 <h1 className="text-4xl font-semibold">Hello Jonathan &#x1F91A;</h1>
                 <h1 className="text-3xl">Here is your case analytics</h1>
             </div>
-            <div className="grid grid-cols-3 gap-5">
+            <div className="grid grid-cols-1  sm:grid-cols-3 gap-5">
                 <Card>
                     <CardHeader>
                         <CardTitle className="flex justify-between items-center">
