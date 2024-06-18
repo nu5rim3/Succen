@@ -1,26 +1,16 @@
-import { Link, Outlet } from 'react-router-dom';
+
+import { Sidebar } from '@/components/SideBar';
+import { Outlet } from 'react-router-dom';
 
 const MainLayout = () => {
     return (
         <div>
-            <aside>
-                {/* Sidebar content */}
-                <nav>
-                    <ul>
-                        <li>
-                            <Link to="/">Home</Link>
-                        </li>
-                        <li>
-                            <Link to="/auth/login">Login</Link>
-                        </li>
-                        <li>
-                            <Link to="/dashboard/messages">Dashboard</Link>
-                        </li>
-                    </ul>
-                </nav>
-            </aside>
-            <main>
-                <Outlet />
+            <Sidebar />
+            <main className='mt-16 sm:ml-[250px] sm:mt-0'>
+                <div className='px-5 bg-gray-100 h-14 flex justify-end items-center'> Search</div>
+                <div className='p-5'>
+                    <Outlet />
+                </div>
             </main>
         </div>
 
