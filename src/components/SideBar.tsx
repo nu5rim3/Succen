@@ -5,6 +5,7 @@ import {
     // Bookmark,
     // Home,
     LayoutDashboard,
+    Mail,
     // List,
     // Mail,
     // MoreHorizontal,
@@ -19,8 +20,8 @@ import { SidebarMobile } from './sidebar-mobile';
 
 const sidebarItems: SidebarItems = {
     links: [
-        { label: 'DashBoard', href: '/', icon: LayoutDashboard },
-        // { label: 'Notifications', href: '/item/notifications', icon: Bell },
+        { label: 'DashBoard', href: '/dashboard', icon: LayoutDashboard },
+        { label: 'Cases', href: '/cases', icon: Mail },
         // { label: 'Messages', href: '/item/messages', icon: Mail },
         // {
         //     href: '/item/lists',

@@ -8,6 +8,7 @@ import NotFound from './pages/NotFound'
 import { Toaster } from './components/ui/toaster';
 import { Login } from './pages/Login';
 const Dashboard = React.lazy(() => import("./pages/Dashboard"));
+const Cases = React.lazy(() => import("./pages/Cases"));
 
 function App() {
 
@@ -33,6 +34,14 @@ function App() {
             element={
               <React.Suspense fallback={<>...</>}>
                 <Dashboard />
+              </React.Suspense>
+            }
+          />
+          <Route
+            path="cases/*"
+            element={
+              <React.Suspense fallback={<>...</>}>
+                <Cases />
               </React.Suspense>
             }
           />
