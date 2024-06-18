@@ -9,11 +9,11 @@ const MainLayout = () => {
         <div>
             <Sidebar />
             <main className='mt-16 sm:ml-[250px] sm:mt-0'>
-                <div className='px-5 bg-gray-100 h-14 flex justify-end items-center gap-2'>
+                <div className='hidden sm:flex px-5 bg-gray-100 h-14 justify-end items-center gap-2'>
                     <Button variant={'ghost'} className='rounded-full bg-white'><Search size={18} /></Button>
                     <Button variant={'ghost'} className='rounded-full bg-white'><Bell size={18} /></Button>
                 </div>
-                <div className='p-5'>
+                <div className='p-5 sm:p-16'>
                     <Outlet />
                 </div>
             </main>
