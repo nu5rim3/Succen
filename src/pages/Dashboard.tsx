@@ -4,12 +4,13 @@ import { DropSelect } from "@/components/custom/DropSelect"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { FileBarChart } from "lucide-react"
+import AnimatedNumbers from "react-animated-numbers";
 
 const Dashboard = () => {
     return (
         <div className="flex justify-center flex-col gap-10">
             {/* Must hide some times */}
-            <div className="text-center">
+            <div className="text-center animate-fade-up animate-duration-[2000ms] animate-delay-0">
                 <h1 className="text-5xl font-normal">Hello Jonathan 👋</h1>
                 <h1 className="text-4xl font-light">Here is your case analytics</h1>
             </div>
@@ -24,7 +25,18 @@ const Dashboard = () => {
                     <CardContent>
                         <div className="grid grid-cols-1 sm:grid-cols-3">
                             <div className="col-span-2 mr-20">
-                                <h2 className="text-5xl font-normal mb-5">42,000</h2>
+                                <h2 className="text-5xl font-normal mb-5">
+                                    <AnimatedNumbers
+                                        includeComma
+                                        transitions={(index) => ({
+                                            type: "spring",
+                                            duration: index + 0.7,
+                                        })}
+                                        animateToNumber={42000}
+
+                                    />
+                                </h2>
+
                                 <p className="text-gray-600 mb-2">Total cases recevied compared to last year</p>
                             </div>
                             <Button className="bg-green-600 hover:bg-green-500">Increase 5.5%</Button>
@@ -42,7 +54,17 @@ const Dashboard = () => {
                     <CardContent>
                         <div className="grid grid-cols-1 sm:grid-cols-3">
                             <div className="col-span-2 mr-20">
-                                <h2 className="text-5xl font-normal mb-5">12,940</h2>
+                                <h2 className="text-5xl font-normal mb-5">
+                                    <AnimatedNumbers
+                                        includeComma
+                                        transitions={(index) => ({
+                                            type: "spring",
+                                            duration: index + 0.7,
+                                        })}
+                                        animateToNumber={12940}
+
+                                    />
+                                </h2>
                                 <p className="text-gray-600 mb-2">Total cases incompleted compared to last year</p>
                             </div>
                             <Button className="bg-red-400 hover:bg-red-500">Decrease 5.5%</Button>
@@ -60,7 +82,17 @@ const Dashboard = () => {
                     <CardContent>
                         <div className="grid grid-cols-1 sm:grid-cols-3">
                             <div className="col-span-2 mr-20">
-                                <h2 className="text-5xl font-normal mb-5">29,060</h2>
+                                <h2 className="text-5xl font-normal mb-5">
+                                    <AnimatedNumbers
+                                        includeComma
+                                        transitions={(index) => ({
+                                            type: "spring",
+                                            duration: index + 0.7,
+                                        })}
+                                        animateToNumber={29060}
+
+                                    />
+                                </h2>
                                 <p className="text-gray-600 mb-2">Total cases completed compared to last year</p>
                             </div>
                             <Button className="bg-green-600 hover:bg-green-500">Increase 5.5%</Button>
