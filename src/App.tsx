@@ -7,6 +7,7 @@ import MainLayout from './layouts/MainLayout'
 import NotFound from './pages/NotFound'
 import { Toaster } from './components/ui/toaster';
 import { Login } from './pages/Login';
+import Loading from './components/custom/Loading';
 const Dashboard = React.lazy(() => import("./pages/Dashboard"));
 const Cases = React.lazy(() => import("./pages/Cases"));
 
@@ -21,7 +22,7 @@ function App() {
           <Route
             path="login"
             element={
-              <React.Suspense fallback={<>...</>}>
+              <React.Suspense fallback={<Loading />}>
                 <Login />
               </React.Suspense>
             }
@@ -32,7 +33,7 @@ function App() {
           <Route
             path="dashboard/*"
             element={
-              <React.Suspense fallback={<>...</>}>
+              <React.Suspense fallback={<Loading />}>
                 <Dashboard />
               </React.Suspense>
             }
@@ -40,7 +41,7 @@ function App() {
           <Route
             path="cases/*"
             element={
-              <React.Suspense fallback={<>...</>}>
+              <React.Suspense fallback={<Loading />}>
                 <Cases />
               </React.Suspense>
             }
