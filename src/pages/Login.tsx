@@ -14,8 +14,9 @@ import {
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import { toast } from "@/components/ui/use-toast"
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { useNavigate } from "react-router-dom"
+import logo from '../assets/react.svg'
 
 const FormSchema = z.object({
     username: z.string().min(2, {
@@ -51,8 +52,8 @@ export function Login() {
         <div className="flex justify-center items-center h-screen">
             <Card className="w-[350px]">
                 <CardHeader>
-                    <CardTitle>WAG STAFF</CardTitle>
-                    <CardDescription>Feel the WAG.</CardDescription>
+                    <img src={logo} className="my-5" />
+                    <CardTitle className="text-center">Welcome</CardTitle>
                 </CardHeader>
                 <CardContent>
 
@@ -93,15 +94,14 @@ export function Login() {
                                     </FormItem>
                                 )}
                             />
-                            {/* <Button type="submit">Submit</Button> */}
+                            <p className="underline cursor-pointer"><a>forgot your password?</a></p>
+                            <div className="flex justify-center">
+
+                                <Button type="submit" className="w-full" onClick={() => navigate('/dashboard')}>Sign in</Button >
+                            </div>
                         </form>
                     </Form>
                 </CardContent>
-
-                <CardFooter className="flex justify-between">
-                    <Button variant="outline">Cancel</Button>
-                    <Button onClick={() => navigate('/dashboard')}>Submit</Button>
-                </CardFooter>
             </Card>
         </div>
     )
