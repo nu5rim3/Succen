@@ -1,11 +1,12 @@
-import { Separator } from './ui/separator';
-import { Popover, PopoverContent, PopoverTrigger } from './ui/popover';
-import { Button } from './ui/button';
-import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar';
-import { Atom, LogIn, LogOut, MoreHorizontal, Settings } from 'lucide-react';
+import { Separator } from '../ui/separator';
+import { Popover, PopoverContent, PopoverTrigger } from '../ui/popover';
+import { Button } from '../ui/button';
+import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar';
+import { LogIn, LogOut, MoreHorizontal, Settings } from 'lucide-react';
 import { SidebarItems } from '@/lib/types';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { SidebarButton } from './SideBar-Button';
+import logo from '../../assets/react.svg';
 
 interface SidebarDesktopProps {
     sidebarItems: SidebarItems;
@@ -19,9 +20,8 @@ export function SidebarDesktop(props: SidebarDesktopProps) {
     return (
         <aside className='w-[250px] max-w-xs h-screen fixed left-0 top-0 z-40 border-r'>
             <div className='h-full px-3 py-4'>
-                <div className='flex flex-row'>
-                    <Atom className='text-green-600' />
-                    <h3 className='mx-3 text-lg font-semibold text-foreground'>WAG <span className='text-green-600'>STAFF</span></h3>
+                <div className='px-2 py-2'>
+                    <img src={logo} />
                 </div>
                 <div className='mt-5'>
                     <div className='flex flex-col gap-1 w-full'>

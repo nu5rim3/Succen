@@ -4,13 +4,13 @@ import {
     SheetContent,
     SheetHeader,
     SheetTrigger,
-} from './ui/sheet';
-import { Button } from './ui/button';
+} from '../ui/sheet';
+import { Button } from '../ui/button';
 import { LogOut, Menu, MoreHorizontal, Settings, X } from 'lucide-react';
 import { SidebarButtonSheet as SidebarButton } from './SideBar-Button';
-import { Separator } from './ui/separator';
-import { Drawer, DrawerContent, DrawerTrigger } from './ui/drawer';
-import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar';
+import { Separator } from '../ui/separator';
+import { Drawer, DrawerContent, DrawerTrigger } from '../ui/drawer';
+import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar';
 import { SidebarItems } from '@/lib/types';
 import { Link, useLocation } from 'react-router-dom';
 

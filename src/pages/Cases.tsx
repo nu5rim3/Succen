@@ -1,10 +1,12 @@
-import CaseTable from "@/components/CaseTable"
-import { Card, CardHeader, CardContent } from "@/components/ui/card"
+import CaseTable from "@/components/custom/CaseTable"
+import { Card, CardHeader, CardContent, CardTitle } from "@/components/ui/card"
 
 const Cases = () => {
     return (
-        <Card>
-            <CardHeader />
+        <Card className="bg-gray-100">
+            <CardHeader>
+                <CardTitle>Case List</CardTitle>
+            </CardHeader>
 
             <CardContent>
                 <CaseTable />

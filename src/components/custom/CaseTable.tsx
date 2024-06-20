@@ -1,9 +1,11 @@
 import React from 'react';
 import { useReactTable, createColumnHelper, getCoreRowModel, flexRender } from '@tanstack/react-table';
 import 'tailwindcss/tailwind.css';
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from './ui/table';
-import { Checkbox } from './ui/checkbox';
-import { Button } from './ui/button';
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '../ui/table';
+import { Checkbox } from '../ui/checkbox';
+import { Button } from '../ui/button';
+import { DropSelect } from './DropSelect';
+import { ToggleGroup, ToggleGroupItem } from '../ui/toggle-group';
 
 interface ICase {
     select?: null;
@@ -11,7 +13,7 @@ interface ICase {
     contractSignedDate: string;
     dateOfDeath: string;
     coCounsel: string;
-    status: 'Open' | 'Closed';
+    status: 'Complete' | 'Incomplete';
     handlingFirm: string;
     caseType: string;
     createdDate: string;
@@ -25,7 +27,7 @@ const data: ICase[] = [
         contractSignedDate: '2022-10-19',
         dateOfDeath: '2018-03-01 00:30:00',
         coCounsel: 'Dianne Russell',
-        status: 'Closed',
+        status: 'Incomplete',
         handlingFirm: 'WLF',
         caseType: 'Case type A',
         createdDate: '2018-03-01 00:30:00',
@@ -37,7 +39,7 @@ const data: ICase[] = [
         contractSignedDate: '2022-10-19',
         dateOfDeath: '2018-03-01 00:30:00',
         coCounsel: 'Dianne Russell',
-        status: 'Open',
+        status: 'Complete',
         handlingFirm: 'WLF',
         caseType: 'Case type B',
         createdDate: '2018-03-01 00:30:00',
@@ -48,7 +50,7 @@ const data: ICase[] = [
         contractSignedDate: '2022-10-19',
         dateOfDeath: '2018-03-01 00:30:00',
         coCounsel: 'Dianne Russell',
-        status: 'Open',
+        status: 'Complete',
         handlingFirm: 'WLF',
         caseType: 'Case type C',
         createdDate: '2018-03-01 00:30:00',
@@ -59,7 +61,7 @@ const data: ICase[] = [
         contractSignedDate: '2022-10-19',
         dateOfDeath: '2018-03-01 00:30:00',
         coCounsel: 'Dianne Russell',
-        status: 'Closed',
+        status: 'Incomplete',
         handlingFirm: 'WLF',
         caseType: 'Case type D',
         createdDate: '2018-03-01 00:30:00',
@@ -71,7 +73,7 @@ const data: ICase[] = [
         contractSignedDate: '2022-10-19',
         dateOfDeath: '2018-03-01 00:30:00',
         coCounsel: 'Dianne Russell',
-        status: 'Open',
+        status: 'Complete',
         handlingFirm: 'WLF',
         caseType: 'Case type E',
         createdDate: '2018-03-01 00:30:00',
@@ -127,8 +129,8 @@ const columns = [
         cell: ({ row }) => {
             const status: string = row.getValue("status")
             const statusClass =
-                status === "Open" ? "bg-green-200 text-green-700" : "bg-red-200 text-red-700"
-            return <span className={`px-4 py-1 rounded-full ${statusClass}`}>{status}</span>
+                status === "Incomplete" ? "bg-blue-800 text-white" : "bg-amber-500 text-white"
+            return <span className={`px-4 py-1 ${statusClass}`}>{status}</span>
         },
 
         footer: info => info.column.id,
@@ -166,14 +168,16 @@ const CaseTable: React.FC = () => {
         <div className="container mx-auto p-4">
             <div className="flex justify-between items-center mb-4">
                 <div className="space-x-2">
-                    <button className="bg-gray-200 text-black px-4 py-2 rounded">All status (829)</button>
-                    <button className="bg-green-200 text-green-700 px-4 py-2 rounded">Open (244)</button>
-                    <button className="bg-red-200 text-red-700 px-4 py-2 rounded">Closed (673)</button>
+                    <ToggleGroup type="single">
+                        <ToggleGroupItem value="a" className='border rounded-none hover:bg-gray-800 hover:text-white data-[state=on]:bg-gray-800 data-[state=on]:text-white'>All status <span className='bg-white text-black rounded-full ml-2 px-1'>829</span></ToggleGroupItem>
+                        <ToggleGroupItem value="b" className='border rounded-none hover:bg-amber-500 hover:text-white data-[state=on]:bg-amber-500 data-[state=on]:text-white'>Complete <span className='bg-amber-500 text-white rounded-full ml-2 px-1'>244</span></ToggleGroupItem>
+                        <ToggleGroupItem value="c" className='border rounded-none hover:bg-blue-800 hover:text-white data-[state=on]:bg-blue-800 data-[state=on]:text-white'>Incomplete <span className='bg-blue-800 text-white rounded-full ml-2 px-1'>673</span></ToggleGroupItem>
+                    </ToggleGroup>
                 </div>
-                <div className="space-x-2">
-                    <button className="bg-gray-200 text-black px-4 py-2 rounded">Filters</button>
-                    <button className="bg-gray-200 text-black px-4 py-2 rounded">All case types</button>
-                    <button className="bg-gray-200 text-black px-4 py-2 rounded">All time</button>
+                <div className="flex gap-2">
+                    <DropSelect className='bg-white' />
+                    <DropSelect className='bg-white' />
+                    <DropSelect className='bg-white' />
                 </div>
             </div>
             <Table>
@@ -195,7 +199,7 @@ const CaseTable: React.FC = () => {
                 </TableHeader>
                 <TableBody>
                     {table.getRowModel().rows.map(row => (
-                        <TableRow key={row.id}>
+                        <TableRow key={row.id} className='hover:bg-white'>
                             {row.getVisibleCells().map(cell => (
                                 <TableCell key={cell.id} className={`px-4 py-4 border-b`}>
                                     {flexRender(cell.column.columnDef.cell, cell.getContext())}
@@ -212,18 +216,18 @@ const CaseTable: React.FC = () => {
                 </div>
                 <div className="space-x-2">
                     <Button
-                        variant="outline"
+                        className='rounded-none'
                         size="sm"
                         onClick={() => table.previousPage()}
-                        disabled={!table.getCanPreviousPage()}
+                    // disabled={!table.getCanPreviousPage()}
                     >
                         Previous
                     </Button>
                     <Button
-                        variant="outline"
+                        className='rounded-none'
                         size="sm"
                         onClick={() => table.nextPage()}
-                        disabled={!table.getCanNextPage()}
+                    // disabled={!table.getCanNextPage()}
                     >
                         Next
                     </Button>

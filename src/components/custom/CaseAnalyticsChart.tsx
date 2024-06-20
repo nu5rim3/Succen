@@ -59,28 +59,28 @@ const CaseAnalyticsChart: React.FC = () => {
                 <YAxis className="stroke-current text-gray-600 hidden" />
                 <Tooltip content={<CustomTooltip />} />
                 <Legend />
-                <defs>
+                {/* <defs>
                     <linearGradient id="colorCaseA" x1="0" y1="0" x2="0" y2="1">
-                        <stop offset="95%" stopColor="#8884d8" stopOpacity={0.8} />
-                        <stop offset="95%" stopColor="#8884d8" stopOpacity={0.1} />
+                        <stop offset="95%" stopColor="#000080" stopOpacity={0.8} />
+                        <stop offset="95%" stopColor="#000080" stopOpacity={0.1} />
                     </linearGradient>
                     <linearGradient id="colorCaseB" x1="0" y1="0" x2="0" y2="1">
-                        <stop offset="5%" stopColor="#82ca9d" stopOpacity={0.8} />
-                        <stop offset="95%" stopColor="#82ca9d" stopOpacity={0.1} />
+                        <stop offset="5%" stopColor="#3535D1" stopOpacity={0.8} />
+                        <stop offset="95%" stopColor="#3535D1" stopOpacity={0.1} />
                     </linearGradient>
                     <linearGradient id="colorCaseC" x1="0" y1="0" x2="0" y2="1">
-                        <stop offset="5%" stopColor="#ffc658" stopOpacity={0.8} />
-                        <stop offset="95%" stopColor="#ffc658" stopOpacity={0.1} />
+                        <stop offset="5%" stopColor="#7D7DEA" stopOpacity={0.8} />
+                        <stop offset="95%" stopColor="#7D7DEA" stopOpacity={0.1} />
                     </linearGradient>
                     <linearGradient id="colorCaseD" x1="0" y1="0" x2="0" y2="1">
-                        <stop offset="5%" stopColor="#ff8042" stopOpacity={0.8} />
-                        <stop offset="95%" stopColor="#ff8042" stopOpacity={0.1} />
+                        <stop offset="5%" stopColor="#BFBFE9" stopOpacity={0.8} />
+                        <stop offset="95%" stopColor="#BFBFE9" stopOpacity={0.1} />
                     </linearGradient>
-                </defs>
-                <Bar dataKey="CaseA" stackId="a" fill="url(#colorCaseA)" radius={10} />
-                <Bar dataKey="CaseB" stackId="a" fill="url(#colorCaseB)" radius={10} />
-                <Bar dataKey="CaseC" stackId="a" fill="url(#colorCaseC)" radius={10} />
-                <Bar dataKey="CaseD" stackId="a" fill="url(#colorCaseD)" radius={10} />
+                </defs> fill="url(#colorCaseA)"*/}
+                <Bar dataKey="CaseA" stackId="a" fill='#000080' radius={0} />
+                <Bar dataKey="CaseB" stackId="a" fill='#3535D1' radius={0} />
+                <Bar dataKey="CaseC" stackId="a" fill='#7D7DEA' radius={0} />
+                <Bar dataKey="CaseD" stackId="a" fill='#BFBFE9' radius={0} />
             </BarChart>
         </ResponsiveContainer>
     );
