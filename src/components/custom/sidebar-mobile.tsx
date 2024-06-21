@@ -6,13 +6,13 @@ import {
     SheetTrigger,
 } from '../ui/sheet';
 import { Button } from '../ui/button';
-import { LogOut, Menu, MoreHorizontal, Settings } from 'lucide-react';
+import { LogIn, LogOut, Menu, MoreHorizontal, Settings } from 'lucide-react';
 import { SidebarButtonSheet as SidebarButton } from './SideBar-Button';
 import { Separator } from '../ui/separator';
 import { Drawer, DrawerContent, DrawerTrigger } from '../ui/drawer';
 import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar';
 import { SidebarItems } from '@/lib/types';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import logo from '../../assets/react.svg';
 
 interface SidebarMobileProps {
@@ -22,6 +22,7 @@ interface SidebarMobileProps {
 export function SidebarMobile(props: SidebarMobileProps) {
     const location = useLocation();
     const pathname = location.pathname;
+    const navigate = useNavigate()
 
     return (
         <Sheet>
@@ -83,6 +84,9 @@ export function SidebarMobile(props: SidebarMobileProps) {
                                     </Link>
                                     <SidebarButton size='sm' icon={LogOut} className='w-full'>
                                         Log Out
+                                    </SidebarButton>
+                                    <SidebarButton size='sm' icon={LogIn} className='w-full' onClick={() => navigate('/auth/login')}>
+                                        Log In
                                     </SidebarButton>
                                 </div>
                             </DrawerContent>
