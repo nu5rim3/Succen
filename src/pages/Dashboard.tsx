@@ -24,7 +24,7 @@ const Dashboard = () => {
                     </CardHeader>
                     <CardContent>
                         <div className="grid grid-cols-1 sm:grid-cols-3">
-                            <div className="col-span-2 mr-20">
+                            <div className="w-full sm:col-span-2 mr-20">
                                 <h2 className="text-5xl font-normal mb-5">
                                     <AnimatedNumbers
                                         includeComma
@@ -53,7 +53,7 @@ const Dashboard = () => {
                     </CardHeader>
                     <CardContent>
                         <div className="grid grid-cols-1 sm:grid-cols-3">
-                            <div className="col-span-2 mr-20">
+                            <div className="w-full sm:col-span-2 mr-20">
                                 <h2 className="text-5xl font-normal mb-5">
                                     <AnimatedNumbers
                                         includeComma
@@ -81,7 +81,7 @@ const Dashboard = () => {
                     </CardHeader>
                     <CardContent>
                         <div className="grid grid-cols-1 sm:grid-cols-3">
-                            <div className="col-span-2 mr-20">
+                            <div className="w-full sm:col-span-2 mr-20">
                                 <h2 className="text-5xl font-normal mb-5">
                                     <AnimatedNumbers
                                         includeComma

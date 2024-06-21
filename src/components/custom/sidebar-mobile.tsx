@@ -1,18 +1,19 @@
 import {
     Sheet,
-    SheetClose,
+    // SheetClose,
     SheetContent,
     SheetHeader,
     SheetTrigger,
 } from '../ui/sheet';
 import { Button } from '../ui/button';
-import { LogOut, Menu, MoreHorizontal, Settings, X } from 'lucide-react';
+import { LogOut, Menu, MoreHorizontal, Settings } from 'lucide-react';
 import { SidebarButtonSheet as SidebarButton } from './SideBar-Button';
 import { Separator } from '../ui/separator';
 import { Drawer, DrawerContent, DrawerTrigger } from '../ui/drawer';
 import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar';
 import { SidebarItems } from '@/lib/types';
 import { Link, useLocation } from 'react-router-dom';
+import logo from '../../assets/react.svg';
 
 interface SidebarMobileProps {
     sidebarItems: SidebarItems;
@@ -32,14 +33,14 @@ export function SidebarMobile(props: SidebarMobileProps) {
             {/* hideClose */}
             <SheetContent side='left' className='px-3 py-4' >
                 <SheetHeader className='flex flex-row justify-between items-center space-y-0'>
-                    <span className='text-lg font-semibold text-foreground mx-3'>
-                        Twitter
-                    </span>
-                    <SheetClose asChild>
+                    <div className='px-2 py-2'>
+                        <img src={logo} />
+                    </div>
+                    {/* <SheetClose asChild>
                         <Button className='h-7 w-7 p-0' variant='ghost'>
                             <X size={15} />
                         </Button>
-                    </SheetClose>
+                    </SheetClose> */}
                 </SheetHeader>
                 <div className='h-full'>
                     <div className='mt-5 flex flex-col w-full gap-1'>
