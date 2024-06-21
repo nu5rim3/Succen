@@ -166,18 +166,18 @@ const CaseTable: React.FC = () => {
 
     return (
         <div className="container mx-auto p-4">
-            <div className="flex justify-between items-center mb-4">
+            <div className="flex flex-col sm:flex-row justify-between items-center mb-4 gap-2">
                 <div className="space-x-2">
-                    <ToggleGroup type="single">
+                    <ToggleGroup type="single" className='flex flex-col sm:flex-row'>
                         <ToggleGroupItem value="a" className='border rounded-none hover:bg-gray-800 hover:text-white data-[state=on]:bg-gray-800 data-[state=on]:text-white'>All status <span className='bg-white text-black rounded-full ml-2 px-1'>829</span></ToggleGroupItem>
                         <ToggleGroupItem value="b" className='border rounded-none hover:bg-amber-500 hover:text-white data-[state=on]:bg-amber-500 data-[state=on]:text-white'>Complete <span className='bg-amber-500 text-white rounded-full ml-2 px-1'>244</span></ToggleGroupItem>
                         <ToggleGroupItem value="c" className='border rounded-none hover:bg-blue-800 hover:text-white data-[state=on]:bg-blue-800 data-[state=on]:text-white'>Incomplete <span className='bg-blue-800 text-white rounded-full ml-2 px-1'>673</span></ToggleGroupItem>
                     </ToggleGroup>
                 </div>
-                <div className="flex gap-2">
-                    <DropSelect className='bg-white' />
-                    <DropSelect className='bg-white' />
-                    <DropSelect className='bg-white' />
+                <div className="flex flex-col sm:flex-row gap-2">
+                    <DropSelect className='bg-white w-full' />
+                    <DropSelect className='bg-white w-full' />
+                    <DropSelect className='bg-white w-full' />
                 </div>
             </div>
             <Table>
