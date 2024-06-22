@@ -16,12 +16,12 @@ export function Login() {
     return (
         <div className="relative h-screen flex-col items-center justify-center md:grid lg:max-w-none lg:grid-cols-2 lg:px-0">
             <div className="relative hidden h-full flex-col bg-muted p-10 text-white lg:flex">
-                <div className="absolute inset-0 bg-zinc-900" />
+                <div className="absolute inset-0 dark:bg-zinc-900" />
                 <div className="relative z-20 flex items-center text-lg font-medium">
                     <img src={logo} />
                 </div>
                 <div className="relative z-20 mt-auto">
-                    <blockquote className="space-y-2">
+                    <blockquote className="space-y-2 text-black dark:text-white">
                         <p className="text-lg">
                             &ldquo;This dashboard has saved me countless hours of work and
                             helped me deliver faster than ever
