@@ -12,12 +12,16 @@ type ThemeProviderState = {
     theme: Theme
     setTheme: (theme: Theme) => void
     toggleTheme: () => void
+    isMinimized: boolean
+    setIsMinimized: () => void
 }
 
 const initialState: ThemeProviderState = {
     theme: "light",
     setTheme: () => null,
     toggleTheme: () => null,
+    isMinimized: true,
+    setIsMinimized: () => null
 }
 
 const ThemeProviderContext = createContext<ThemeProviderState>(initialState)
@@ -31,6 +35,7 @@ export function ThemeProvider({
     const [theme, setTheme] = useState<Theme>(
         () => (localStorage.getItem(storageKey) as Theme) || defaultTheme
     )
+    const [isMinimized, setIsMinimized] = useState(true);
 
     useEffect(() => {
         const root = window.document.documentElement
@@ -63,6 +68,10 @@ export function ThemeProvider({
                 return newTheme
             })
         },
+        isMinimized,
+        setIsMinimized: () => {
+            setIsMinimized((prev) => !prev)
+        }
     }
 
     return (

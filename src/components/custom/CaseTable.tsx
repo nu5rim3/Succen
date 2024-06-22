@@ -165,7 +165,7 @@ const CaseTable: React.FC = () => {
     });
 
     return (
-        <div className="container mx-auto p-4">
+        <div className="mx-auto p-4">
             <div className="flex flex-col sm:flex-row justify-between items-center mb-4 gap-2">
                 <div className="space-x-2">
                     <ToggleGroup type="single" className='flex flex-col sm:flex-row'>

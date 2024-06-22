@@ -5,12 +5,14 @@ import { SheetClose } from '../ui/sheet';
 
 interface SidebarButtonProps extends ButtonProps {
     icon?: LucideIcon;
+    isShowLable?: boolean;
 }
 
 export function SidebarButton({
     icon: Icon,
     className,
     children,
+    isShowLable,
     ...props
 }: SidebarButtonProps) {
     return (
@@ -19,8 +21,8 @@ export function SidebarButton({
             className={cn('gap-2 justify-start', className)}
             {...props}
         >
-            {Icon && <Icon size={20} />}
-            <span>{children}</span>
+            {Icon && <Icon size={isShowLable ? 20 : 20} />}
+            {isShowLable && <span>{children}</span>}
         </Button>
     );
 }
