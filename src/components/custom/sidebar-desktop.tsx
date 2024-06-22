@@ -72,8 +72,8 @@ export function SidebarDesktop(props: SidebarDesktopProps) {
                                             Account Settings
                                         </SidebarButton>
                                     </Link>
-                                    <SidebarButton size='sm' icon={theme === 'dark' ? Moon : Sun} className='w-full' onClick={toggleTheme}>
-                                        {theme === 'dark' ? 'Dark Mode' : 'Light Mode'}
+                                    <SidebarButton size='sm' icon={theme === 'dark' ? Sun : Moon} className='w-full' onClick={toggleTheme}>
+                                        {theme === 'dark' ? 'Light Mode' : 'Dark Mode'}
                                     </SidebarButton>
                                     <SidebarButton size='sm' icon={LogOut} className='w-full'>
                                         Log Out
