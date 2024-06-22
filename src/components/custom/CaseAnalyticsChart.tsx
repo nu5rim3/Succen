@@ -33,7 +33,7 @@ const data: DataItem[] = [
 const CustomTooltip: React.FC<TooltipProps<ValueType, NameType>> = ({ active, payload, label }) => {
     if (active && payload && payload.length) {
         return (
-            <div className="bg-white p-2 rounded shadow-lg">
+            <div className="bg-white dark:bg-gray-700 p-2 rounded shadow-lg">
                 <p className="font-semibold">{label}</p>
                 {payload.map((entry, index) => (
                     <p key={`item-${index}`} className="text-sm">{`${entry.name}: ${entry.value}`}</p>
@@ -56,7 +56,7 @@ const CaseAnalyticsChart: React.FC = () => {
             >
                 {/* <CartesianGrid strokeDasharray="3 3" className="stroke-current text-gray-200" /> */}
                 <XAxis dataKey="month" className="stroke-current text-gray-600 hidden" />
-                <YAxis className="stroke-current text-gray-600 hidden" />
+                <YAxis className="stroke-current text-gray-600" />
                 <Tooltip content={<CustomTooltip />} />
                 <Legend />
                 {/* <defs>

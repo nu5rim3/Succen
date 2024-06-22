@@ -101,11 +101,11 @@ const Dashboard = () => {
                     </CardContent>
                 </Card>
             </div>
-            <Card className="bg-gray-100">
+            <Card className="bg-gray-100 dark:bg-gray-800">
                 <CardHeader>
                     <div className="flex flex-col sm:flex-row justify-between items-center">
                         <div className="flex flex-row gap-3 items-center">
-                            <div className="rounded-full bg-white p-3"><FileBarChart /></div>
+                            <div className="rounded-full bg-white dark:bg-gray-700 p-3"><FileBarChart /></div>
                             <CardTitle className="flex flex-col">Completed Cases
                                 <p className="text-base font-normal text-gray-600">Total cases recevied compared to last year</p>
                             </CardTitle>
@@ -125,7 +125,7 @@ const Dashboard = () => {
                 </CardContent>
             </Card>
 
-            <Card className="bg-gray-100">
+            <Card className="bg-gray-100 dark:bg-gray-800">
                 <CardHeader />
 
                 <CardContent>

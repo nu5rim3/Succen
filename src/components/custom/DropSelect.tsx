@@ -14,7 +14,7 @@ interface IDropSelect {
 export const DropSelect: React.FC<IDropSelect> = ({ className }) => {
     return (
         <Select>
-            <SelectTrigger className={`w-1/3 bg-gray-100 border-none rounded-none ${className}`}>
+            <SelectTrigger className={`w-1/3 bg-gray-100 dark:bg-gray-700 border-none rounded-none ${className}`}>
                 <SelectValue placeholder="All Time" />
             </SelectTrigger>
             <SelectContent>

@@ -2,11 +2,13 @@ import { Separator } from '../ui/separator';
 import { Popover, PopoverContent, PopoverTrigger } from '../ui/popover';
 import { Button } from '../ui/button';
 import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar';
-import { LogIn, LogOut, MoreHorizontal, Settings } from 'lucide-react';
+import { ChevronLeft, LogIn, LogOut, Moon, MoreHorizontal, Settings, Sun } from 'lucide-react';
 import { SidebarItems } from '@/lib/types';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { SidebarButton } from './SideBar-Button';
 import logo from '../../assets/react.svg';
+import { cn } from '@/lib/utils';
+import { useTheme } from '@/context/themeProvider';
 
 interface SidebarDesktopProps {
     sidebarItems: SidebarItems;
@@ -16,9 +18,17 @@ export function SidebarDesktop(props: SidebarDesktopProps) {
     const navigate = useNavigate()
     const location = useLocation();
     const pathname = location.pathname;
+    const { theme, toggleTheme } = useTheme()
 
     return (
-        <aside className='w-[250px] max-w-xs h-screen fixed left-0 top-0 z-40 border-r'>
+        <aside className='w-[250px] max-w-xs h-screen fixed left-0 top-0 z-40 border-r border-gray-500'>
+            <ChevronLeft
+                className={cn(
+                    'absolute -right-3 top-20 cursor-pointer rounded-full border bg-background text-3xl text-foreground',
+                    //   isMinimized && 'rotate-180'
+                )}
+            // onClick={handleToggle}
+            />
             <div className='h-full px-3 py-4'>
                 <div className='px-2 py-2'>
                     <img src={logo} />
@@ -62,6 +72,9 @@ export function SidebarDesktop(props: SidebarDesktopProps) {
                                             Account Settings
                                         </SidebarButton>
                                     </Link>
+                                    <SidebarButton size='sm' icon={theme === 'dark' ? Moon : Sun} className='w-full' onClick={toggleTheme}>
+                                        {theme === 'dark' ? 'Dark Mode' : 'Light Mode'}
+                                    </SidebarButton>
                                     <SidebarButton size='sm' icon={LogOut} className='w-full'>
                                         Log Out
                                     </SidebarButton>

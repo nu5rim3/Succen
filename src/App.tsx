@@ -8,13 +8,14 @@ import NotFound from './pages/NotFound'
 import { Toaster } from './components/ui/toaster';
 import { Login } from './pages/Login';
 import Loading from './components/custom/Loading';
+import { ThemeProvider } from './context/themeProvider';
 const Dashboard = React.lazy(() => import("./pages/Dashboard"));
 const Cases = React.lazy(() => import("./pages/Cases"));
 
 function App() {
 
   return (
-    <>
+    <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
       <Toaster />
       <Routes>
         <Route path="/auth" element={<AuthLayout />}>
@@ -50,7 +51,7 @@ function App() {
         <Route path="*" element={<NotFound />} />
       </Routes>
 
-    </>
+    </ThemeProvider>
   )
 }
 
