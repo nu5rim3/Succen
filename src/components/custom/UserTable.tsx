@@ -74,7 +74,7 @@ const columns = [
         header: () => 'Case Types',
         cell: ({ row }) => {
             const caseTypes: string[] = row.getValue("caseType")
-            return caseTypes.map((item: string, index: number) => <div key={index}>{item}, </div>)
+            return caseTypes.map((item: string, index: number) => <span className='px-2 py-1 bg-primary/20 mr-1' key={index}>{item}</span>)
         },
         footer: info => info.column.id,
     }),
@@ -82,7 +82,6 @@ const columns = [
         header: () => 'Status',
         cell: ({ row }) => {
             const status: string = row.getValue("status")
-            // TODO: write a switch case for get the status look
             let statusClass = ''
             switch (status) {
                 case 'Accepted':
