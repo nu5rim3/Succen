@@ -1,17 +1,8 @@
 import { Link } from "react-router-dom"
 import UserAuthForm from "@/components/forms/user-auth-form"
 import logo from '../assets/react.svg'
-// const FormSchema = z.object({
-//     username: z.string().min(2, {
-//         message: "Username must be at least 2 characters.",
-//     }),
-//     password: z.string().min(2, {
-//         message: "Username must be at least 2 characters.",
-//     })
-// })
 
 export function Login() {
-    // const navigate = useNavigate()
 
     return (
         <div className="relative h-screen flex-col items-center justify-center md:grid lg:max-w-none lg:grid-cols-2 lg:px-0">

@@ -15,7 +15,7 @@ const MainLayout = () => {
                     <Button variant={'ghost'} className='rounded-full bg-white dark:bg-gray-700'><Search size={18} /></Button>
                     <Button variant={'ghost'} className='rounded-full bg-white dark:bg-gray-700'><Bell size={18} /></Button>
                 </div>
-                <div className='p-5 sm:p-16'>
+                <div className='p-5 sm:px-16'>
                     <Outlet />
                 </div>
             </main>

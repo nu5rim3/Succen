@@ -7,6 +7,7 @@ import { SidebarItems } from '@/lib/types';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { SidebarButton } from './SideBar-Button';
 import logo from '../../assets/react.svg';
+import logo2 from '../../assets/react2.svg';
 import { cn } from '@/lib/utils';
 import { useTheme } from '@/context/themeProvider';
 
@@ -31,7 +32,7 @@ export function SidebarDesktop(props: SidebarDesktopProps) {
             />
             <div className='h-full px-3 py-4'>
                 <div className='px-2 py-2'>
-                    {isMinimized && <img src={logo} className='w-8' />}
+                    {isMinimized && <img src={logo2} className='w-8' />}
                     {!isMinimized && <img src={logo} />}
                 </div>
                 <div className='mt-5'>

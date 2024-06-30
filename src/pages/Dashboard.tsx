@@ -1,14 +1,14 @@
 import CaseAnalyticsChart from "@/components/custom/CaseAnalyticsChart"
 import CaseTable from "@/components/custom/CaseTable"
-import {DropSelect} from "@/components/custom/DropSelect"
-import {Button} from "@/components/ui/button"
-import {Card, CardContent, CardHeader, CardTitle} from "@/components/ui/card"
-import {FileBarChart} from "lucide-react"
+import { DropSelect } from "@/components/custom/DropSelect"
+import { Button } from "@/components/ui/button"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { FileBarChart } from "lucide-react"
 import AnimatedNumbers from "react-animated-numbers";
 import YearPicker from "@/components/custom/YearPicker.tsx";
-import {useEffect, useState} from "react";
-import {CASE_STATUSES} from "@/lib/constants.ts";
-import {fetchCaseTypes} from "@/services/dashboard/dashboard.service.ts";
+import { useEffect, useState } from "react";
+import { CASE_STATUSES } from "@/lib/constants.ts";
+import { fetchCaseTypes } from "@/services/dashboard/dashboard.service.ts";
 
 const Dashboard = () => {
     const [caseTypes, setCaseTypes] = useState<TSelectListType[]>([])
@@ -20,8 +20,8 @@ const Dashboard = () => {
 
     useEffect(() => {
         fetchCaseTypes()
-            .then(({data: {data}}) => {
-                setCaseTypes(data.map(d => ({name: d.caseType, value: d.value})))
+            .then(({ data: { data } }) => {
+                setCaseTypes(data.map(d => ({ name: d.caseType, value: d.value })))
             })
             .catch(error => {
                 console.log(error)
@@ -30,11 +30,12 @@ const Dashboard = () => {
     }, []);
 
     useEffect(() => {
-        console.log({chartFilters})
+        console.log({ chartFilters })
     }, [chartFilters]);
+
     return (
         <div className="flex justify-center flex-col gap-10">
-            {/* Must hide some times */}
+            {/* TODO: Must hide some times */}
             <div className="text-center animate-fade-up animate-duration-[2000ms] animate-delay-0">
                 <h1 className="text-5xl font-normal">Hello Jonathan 👋</h1>
                 <h1 className="text-4xl font-light">Here is your case analytics</h1>
@@ -44,7 +45,7 @@ const Dashboard = () => {
                     <CardHeader>
                         <div className="flex justify-between">
                             <CardTitle>Total Cases</CardTitle>
-                            <YearPicker/>
+                            <YearPicker />
                         </div>
                     </CardHeader>
                     <CardContent>
@@ -64,7 +65,7 @@ const Dashboard = () => {
 
                                 <p className="text-gray-600 mb-2">Total cases recevied compared to last year</p>
                             </div>
-                            <Button className="bg-green-600 hover:bg-green-500">Increase 5.5%</Button>
+                            <Button className="bg-green-600 hover:bg-green-500 dark:bg-green-500">Increase 5.5%</Button>
                         </div>
 
                     </CardContent>
@@ -73,7 +74,7 @@ const Dashboard = () => {
                     <CardHeader>
                         <div className="flex justify-between">
                             <CardTitle>Incomplete Cases</CardTitle>
-                            <YearPicker/>
+                            <YearPicker />
                         </div>
                     </CardHeader>
                     <CardContent>
@@ -92,7 +93,7 @@ const Dashboard = () => {
                                 </h2>
                                 <p className="text-gray-600 mb-2">Total cases incompleted compared to last year</p>
                             </div>
-                            <Button className="bg-red-400 hover:bg-red-500">Decrease 5.5%</Button>
+                            <Button className="bg-red-400 hover:bg-red-500 dark:bg-red-500">Decrease 5.5%</Button>
                         </div>
 
                     </CardContent>
@@ -101,7 +102,7 @@ const Dashboard = () => {
                     <CardHeader>
                         <div className="flex justify-between">
                             <CardTitle>Completed Cases</CardTitle>
-                            <YearPicker/>
+                            <YearPicker />
                         </div>
                     </CardHeader>
                     <CardContent>
@@ -120,7 +121,7 @@ const Dashboard = () => {
                                 </h2>
                                 <p className="text-gray-600 mb-2">Total cases completed compared to last year</p>
                             </div>
-                            <Button className="bg-green-600 hover:bg-green-500">Increase 5.5%</Button>
+                            <Button className="bg-green-600 hover:bg-green-500 dark:bg-green-500">Increase 5.5%</Button>
                         </div>
 
                     </CardContent>
@@ -130,7 +131,7 @@ const Dashboard = () => {
                 <CardHeader>
                     <div className="flex flex-col sm:flex-row justify-between items-center">
                         <div className="flex flex-row gap-3 items-center">
-                            <div className="rounded-full bg-white dark:bg-gray-700 p-3"><FileBarChart/></div>
+                            <div className="rounded-full bg-white dark:bg-gray-700 p-3"><FileBarChart /></div>
                             <CardTitle className="flex flex-col">Completed Cases
                                 <p className="text-base font-normal text-gray-600">Total cases recevied compared to last
                                     year</p>
@@ -140,55 +141,55 @@ const Dashboard = () => {
 
                         <div className="flex flex-shrink-0 gap-2">
                             <DropSelect className="bg-white flex-1 w-[140px]" placeHolder="All Cases"
-                                        value={caseTypes[0]?.value}
-                                        itemList={caseTypes}
-                                        onChange={(e) => {
-                                            console.log(e)
-                                            setChartFilters(prevState => (
-                                                {
-                                                    ...prevState,
-                                                    caseType: e
-                                                }
-                                            ))
-                                        }}
+                                value={caseTypes[0]?.value}
+                                itemList={caseTypes}
+                                onChange={(e) => {
+
+                                    setChartFilters(prevState => (
+                                        {
+                                            ...prevState,
+                                            caseType: e
+                                        }
+                                    ))
+                                }}
                             />
                             <DropSelect className="bg-white flex-1 w-[140px]" placeHolder="Pending" value="Pending"
-                                        itemList={CASE_STATUSES}
-                                        onChange={(e) => {
-                                            console.log(e)
-                                            setChartFilters(prevState => (
-                                                {
-                                                    ...prevState,
-                                                    status: e
-                                                }
-                                            ))
-                                        }}
+                                itemList={CASE_STATUSES}
+                                onChange={(e) => {
+
+                                    setChartFilters(prevState => (
+                                        {
+                                            ...prevState,
+                                            status: e
+                                        }
+                                    ))
+                                }}
                             />
                             <YearPicker className="bg-white flex-1 w-[130px]"
-                                        onChange={(e) => {
-                                            console.log(e)
-                                            setChartFilters(prevState => (
-                                                {
-                                                    ...prevState,
-                                                    year: e
-                                                }
-                                            ))
-                                        }}
+                                onChange={(e) => {
+
+                                    setChartFilters(prevState => (
+                                        {
+                                            ...prevState,
+                                            year: e
+                                        }
+                                    ))
+                                }}
                             />
                         </div>
                     </div>
 
                 </CardHeader>
                 <CardContent>
-                    <CaseAnalyticsChart/>
+                    <CaseAnalyticsChart />
                 </CardContent>
             </Card>
 
             <Card className="bg-gray-100 dark:bg-gray-800">
-                <CardHeader/>
+                <CardHeader />
 
                 <CardContent>
-                    <CaseTable caseTypes={caseTypes}/>
+                    <CaseTable caseTypes={caseTypes} />
                 </CardContent>
             </Card>
 

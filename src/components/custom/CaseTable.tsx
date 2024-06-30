@@ -6,7 +6,7 @@ import { Checkbox } from '../ui/checkbox';
 import { DropSelect } from './DropSelect';
 import { ToggleGroup, ToggleGroupItem } from '../ui/toggle-group';
 import { Pagination, PaginationContent, PaginationItem, PaginationPrevious, PaginationLink, PaginationEllipsis, PaginationNext } from '../ui/pagination';
-import {RadioGroup, RadioItem} from "@/components/ui/radio.tsx";
+import { RadioGroup, RadioItem } from "@/components/ui/radio.tsx";
 
 interface ICase {
     select?: null;
@@ -162,7 +162,7 @@ type TCaseTable = {
     caseTypes: TSelectListType[]
 }
 
-const CaseTable: React.FC<TCaseTable> = ({caseTypes}) => {
+const CaseTable: React.FC<TCaseTable> = ({ caseTypes }) => {
     const table = useReactTable({
         data,
         columns,
@@ -174,19 +174,19 @@ const CaseTable: React.FC<TCaseTable> = ({caseTypes}) => {
             <div className="flex flex-col sm:flex-row justify-between items-center mb-4 gap-2">
                 <div className="space-x-2">
                     <ToggleGroup type="single" className='flex flex-col sm:flex-row'>
-                        <ToggleGroupItem value="a" className='border rounded-none hover:bg-gray-700 hover:text-white data-[state=on]:bg-gray-700 data-[state=on]:text-white'>All status <span className='bg-white text-black rounded-full ml-2 px-1'>829</span></ToggleGroupItem>
-                        <ToggleGroupItem value="b" className='border rounded-none hover:bg-amber-500 hover:text-white data-[state=on]:bg-amber-500 data-[state=on]:text-white'>Complete <span className='bg-amber-500 text-white rounded-full ml-2 px-1'>244</span></ToggleGroupItem>
-                        <ToggleGroupItem value="c" className='border rounded-none hover:bg-blue-800 hover:text-white data-[state=on]:bg-blue-800 data-[state=on]:text-white'>Incomplete <span className='bg-blue-800 text-white rounded-full ml-2 px-1'>673</span></ToggleGroupItem>
+                        <ToggleGroupItem value="a" className='border dark:border-gray-700 rounded-none hover:bg-gray-700 hover:text-white data-[state=on]:bg-gray-700 data-[state=on]:text-white'>All status <span className='bg-white text-black rounded-full ml-2 px-1'>829</span></ToggleGroupItem>
+                        <ToggleGroupItem value="b" className='border dark:border-gray-700 rounded-none hover:bg-amber-500 hover:text-white data-[state=on]:bg-amber-500 data-[state=on]:text-white'>Complete <span className='bg-amber-500 text-white rounded-full ml-2 px-1'>244</span></ToggleGroupItem>
+                        <ToggleGroupItem value="c" className='border dark:border-gray-700 rounded-none hover:bg-blue-800 hover:text-white data-[state=on]:bg-blue-800 data-[state=on]:text-white'>Incomplete <span className='bg-blue-800 text-white rounded-full ml-2 px-1'>673</span></ToggleGroupItem>
                     </ToggleGroup>
                 </div>
                 <div className="flex flex-col sm:flex-row gap-2">
                     <DropSelect className='bg-white w-full' />
                     <DropSelect className="bg-white w-[140px] flex-shrink-0" placeHolder="All Cases"
-                                value={caseTypes[0]?.value}
-                                itemList={caseTypes}
-                                onChange={(e) => {
-                                    console.log(e)
-                                }}
+                        value={caseTypes[0]?.value}
+                        itemList={caseTypes}
+                        onChange={(e) => {
+                            console.log(e)
+                        }}
                     />
                     <RadioGroup >
                         <RadioItem value="all" id="all">All time</RadioItem>

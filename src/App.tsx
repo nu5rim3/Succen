@@ -11,6 +11,7 @@ import Loading from './components/custom/Loading';
 import { ThemeProvider } from './context/themeProvider';
 const Dashboard = React.lazy(() => import("./pages/Dashboard"));
 const Cases = React.lazy(() => import("./pages/Cases"));
+const Invites = React.lazy(() => import("./pages/Invites"));
 
 function App() {
 
@@ -44,6 +45,14 @@ function App() {
             element={
               <React.Suspense fallback={<Loading />}>
                 <Cases />
+              </React.Suspense>
+            }
+          />
+          <Route
+            path="invites/*"
+            element={
+              <React.Suspense fallback={<Loading />}>
+                <Invites />
               </React.Suspense>
             }
           />

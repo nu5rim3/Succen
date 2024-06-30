@@ -6,6 +6,7 @@ import {
     // Bookmark,
     // Home,
     LayoutDashboard,
+    UserPlus,
     // List,
     // Mail,
     // MoreHorizontal,
@@ -22,6 +23,7 @@ const sidebarItems: SidebarItems = {
     links: [
         { label: 'DashBoard', href: '/dashboard', icon: LayoutDashboard },
         { label: 'Cases', href: '/cases', icon: FolderKanban },
+        { label: 'Invites', href: '/invites', icon: UserPlus },
         // { label: 'Messages', href: '/item/messages', icon: Mail },
         // {
         //     href: '/item/lists',
