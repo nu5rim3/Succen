@@ -15,7 +15,6 @@ import { useForm } from 'react-hook-form';
 import * as z from 'zod';
 import { Dialog, DialogFooter } from '../ui/dialog';
 import { MultiSelect } from '../ui/multi-select';
-import { Cat, Dog, Rabbit, Turtle } from 'lucide-react';
 
 interface IInviteUserForm {
     toggle: () => void;
