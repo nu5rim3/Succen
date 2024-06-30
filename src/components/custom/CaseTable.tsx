@@ -6,6 +6,7 @@ import { Checkbox } from '../ui/checkbox';
 import { DropSelect } from './DropSelect';
 import { ToggleGroup, ToggleGroupItem } from '../ui/toggle-group';
 import { Pagination, PaginationContent, PaginationItem, PaginationPrevious, PaginationLink, PaginationEllipsis, PaginationNext } from '../ui/pagination';
+import {RadioGroup, RadioItem} from "@/components/ui/radio.tsx";
 
 interface ICase {
     select?: null;
@@ -157,7 +158,11 @@ const columns = [
     }),
 ];
 
-const CaseTable: React.FC = () => {
+type TCaseTable = {
+    caseTypes: TSelectListType[]
+}
+
+const CaseTable: React.FC<TCaseTable> = ({caseTypes}) => {
     const table = useReactTable({
         data,
         columns,
@@ -176,8 +181,18 @@ const CaseTable: React.FC = () => {
                 </div>
                 <div className="flex flex-col sm:flex-row gap-2">
                     <DropSelect className='bg-white w-full' />
-                    <DropSelect className='bg-white w-full' />
-                    <DropSelect className='bg-white w-full' />
+                    <DropSelect className="bg-white w-[140px] flex-shrink-0" placeHolder="All Cases"
+                                value={caseTypes[0]?.value}
+                                itemList={caseTypes}
+                                onChange={(e) => {
+                                    console.log(e)
+                                }}
+                    />
+                    <RadioGroup >
+                        <RadioItem value="all" id="all">All time</RadioItem>
+                        <RadioItem value="7d" id="7d">7 days</RadioItem>
+                        <RadioItem value="30d" id="30d">30 days</RadioItem>
+                    </RadioGroup>
                 </div>
             </div>
             <Table>
