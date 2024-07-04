@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import {
     Select,
     SelectContent,
@@ -16,7 +16,7 @@ interface IDropSelect {
     itemList?: { name: string; value: string; }[]
 }
 
-export const DropSelect: React.FC<IDropSelect> = ({className, onChange, itemList, placeHolder = "All Time", value}) => {
+export const DropSelect: React.FC<IDropSelect> = ({ className, onChange, itemList, placeHolder = "All Time", value }) => {
     const [selection, setSelection] = useState(value);
 
     useEffect(() => {
@@ -30,8 +30,8 @@ export const DropSelect: React.FC<IDropSelect> = ({className, onChange, itemList
 
     return (
         <Select value={selection} onValueChange={handleValueChange}>
-            <SelectTrigger className={`w-1/3 bg-gray-100 dark:bg-gray-700 border-none rounded-none ${className}`}>
-                <SelectValue placeholder={placeHolder}/>
+            <SelectTrigger className={`w-1/3 bg-gray-100 dark:bg-primary/10 border-none rounded-3xl ${className}`}>
+                <SelectValue placeholder={placeHolder} />
             </SelectTrigger>
             <SelectContent>
                 <SelectGroup>

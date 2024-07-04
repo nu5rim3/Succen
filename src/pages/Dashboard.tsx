@@ -3,12 +3,13 @@ import CaseTable from "@/components/custom/CaseTable"
 import { DropSelect } from "@/components/custom/DropSelect"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { FileBarChart } from "lucide-react"
+import { FileBarChart, FilePieChart } from "lucide-react"
 import AnimatedNumbers from "react-animated-numbers";
 import YearPicker from "@/components/custom/YearPicker.tsx";
 import { useEffect, useState } from "react";
-import { CASE_STATUSES } from "@/lib/constants.ts";
+import { CASE_TYPES } from "@/lib/constants.ts";
 import { fetchCaseTypes } from "@/services/dashboard/dashboard.service.ts";
+import CreateCaseDialog from "@/components/custom/CreateCaseDialog"
 
 const Dashboard = () => {
     const [caseTypes, setCaseTypes] = useState<TSelectListType[]>([])
@@ -17,6 +18,11 @@ const Dashboard = () => {
         status: "Pending",
         year: "all"
     })
+    const [openCreate, setOpenCreate] = useState<boolean>(false);
+
+    const toggleDialog = () => {
+        setOpenCreate(!openCreate);
+    }
 
     useEffect(() => {
         fetchCaseTypes()
@@ -36,16 +42,19 @@ const Dashboard = () => {
     return (
         <div className="flex justify-center flex-col gap-10">
             {/* TODO: Must hide some times */}
-            <div className="text-center animate-fade-up animate-duration-[2000ms] animate-delay-0">
-                <h1 className="text-5xl font-normal">Hello Jonathan 👋</h1>
-                <h1 className="text-4xl font-light">Here is your case analytics</h1>
+            <div className="text-left animate-fade-up animate-duration-[2000ms] animate-delay-0">
+                <h1 className="text-5xl font-normal">Hello Allex 👋</h1>
+                <h1 className="text-4xl font-light">Welcome to Dashboard</h1>
+            </div>
+            <div className="flex flex-row gap-3 justify-end">
+                <YearPicker className="w-44" />
+                <Button className="" variant={'default'} onClick={() => toggleDialog()}>Create New Case</Button>
             </div>
             <div className="grid grid-cols-1  sm:grid-cols-3 gap-5">
                 <Card>
                     <CardHeader>
                         <div className="flex justify-between">
-                            <CardTitle>Total Cases</CardTitle>
-                            <YearPicker />
+                            <CardTitle>Total Case Tags</CardTitle>
                         </div>
                     </CardHeader>
                     <CardContent>
@@ -63,7 +72,7 @@ const Dashboard = () => {
                                     />
                                 </h2>
 
-                                <p className="text-gray-600 mb-2">Total cases recevied compared to last year</p>
+                                <p className="text-gray-600 mb-2">Total case tags created compared to last year</p>
                             </div>
                             <Button className="bg-green-600 hover:bg-green-500 dark:bg-green-500">Increase 5.5%</Button>
                         </div>
@@ -73,8 +82,7 @@ const Dashboard = () => {
                 <Card>
                     <CardHeader>
                         <div className="flex justify-between">
-                            <CardTitle>Incomplete Cases</CardTitle>
-                            <YearPicker />
+                            <CardTitle>Positive Tags</CardTitle>
                         </div>
                     </CardHeader>
                     <CardContent>
@@ -91,7 +99,7 @@ const Dashboard = () => {
 
                                     />
                                 </h2>
-                                <p className="text-gray-600 mb-2">Total cases incompleted compared to last year</p>
+                                <p className="text-gray-600 mb-2">Total positive tags compared to last year</p>
                             </div>
                             <Button className="bg-red-400 hover:bg-red-500 dark:bg-red-500">Decrease 5.5%</Button>
                         </div>
@@ -101,8 +109,7 @@ const Dashboard = () => {
                 <Card>
                     <CardHeader>
                         <div className="flex justify-between">
-                            <CardTitle>Completed Cases</CardTitle>
-                            <YearPicker />
+                            <CardTitle>Negative Tags</CardTitle>
                         </div>
                     </CardHeader>
                     <CardContent>
@@ -119,7 +126,7 @@ const Dashboard = () => {
 
                                     />
                                 </h2>
-                                <p className="text-gray-600 mb-2">Total cases completed compared to last year</p>
+                                <p className="text-gray-600 mb-2">Total negative tags compared to last year</p>
                             </div>
                             <Button className="bg-green-600 hover:bg-green-500 dark:bg-green-500">Increase 5.5%</Button>
                         </div>
@@ -127,44 +134,18 @@ const Dashboard = () => {
                     </CardContent>
                 </Card>
             </div>
-            <Card className="bg-gray-100 dark:bg-gray-800">
+            <Card className="bg-gray-100">
                 <CardHeader>
                     <div className="flex flex-col sm:flex-row justify-between items-center">
                         <div className="flex flex-row gap-3 items-center">
-                            <div className="rounded-full bg-white dark:bg-gray-700 p-3"><FileBarChart /></div>
-                            <CardTitle className="flex flex-col">Completed Cases
-                                <p className="text-base font-normal text-gray-600">Total cases recevied compared to last
-                                    year</p>
+                            <div className="rounded-full bg-white dark:bg-gray-700 p-3"><FilePieChart /></div>
+                            <CardTitle className="flex flex-col">Case tags breakdown
+                                <p className="text-base font-normal text-gray-600">Provides how many positive and negative tags for each case type</p>
                             </CardTitle>
 
                         </div>
 
                         <div className="flex flex-shrink-0 gap-2">
-                            <DropSelect className="bg-white flex-1 w-[140px]" placeHolder="All Cases"
-                                value={caseTypes[0]?.value}
-                                itemList={caseTypes}
-                                onChange={(e) => {
-
-                                    setChartFilters(prevState => (
-                                        {
-                                            ...prevState,
-                                            caseType: e
-                                        }
-                                    ))
-                                }}
-                            />
-                            <DropSelect className="bg-white flex-1 w-[140px]" placeHolder="Pending" value="Pending"
-                                itemList={CASE_STATUSES}
-                                onChange={(e) => {
-
-                                    setChartFilters(prevState => (
-                                        {
-                                            ...prevState,
-                                            status: e
-                                        }
-                                    ))
-                                }}
-                            />
                             <YearPicker className="bg-white flex-1 w-[130px]"
                                 onChange={(e) => {
 
@@ -172,6 +153,18 @@ const Dashboard = () => {
                                         {
                                             ...prevState,
                                             year: e
+                                        }
+                                    ))
+                                }}
+                            />
+                            <DropSelect className="bg-white flex-1 w-[200px]" placeHolder="All case type" value="all"
+                                itemList={CASE_TYPES}
+                                onChange={(e) => {
+
+                                    setChartFilters(prevState => (
+                                        {
+                                            ...prevState,
+                                            caseType: e
                                         }
                                     ))
                                 }}
@@ -185,14 +178,21 @@ const Dashboard = () => {
                 </CardContent>
             </Card>
 
-            <Card className="bg-gray-100 dark:bg-gray-800">
-                <CardHeader />
+            <Card className="bg-gray-100">
+                <CardHeader>
+                    <div className="flex flex-row gap-3 items-center">
+                        <div className="rounded-full bg-white dark:bg-gray-700 p-3"><FileBarChart /></div>
+                        <CardTitle className="flex flex-col">File cases data
+                            <p className="text-base font-normal text-gray-600">Provides how many positive and negative tags for each case type</p>
+                        </CardTitle>
 
+                    </div>
+                </CardHeader>
                 <CardContent>
                     <CaseTable caseTypes={caseTypes} />
                 </CardContent>
             </Card>
-
+            <CreateCaseDialog open={openCreate} toggle={toggleDialog} />
         </div>
     )
 }

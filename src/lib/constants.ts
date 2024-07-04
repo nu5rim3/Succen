@@ -1,10 +1,9 @@
-const CASE_STATUSES = [
-    {name: 'Open', value: "Open"},
-    {name: 'Closed', value: "Closed"},
-    {name: 'Pending', value: "Pending"},
-    {name: 'Deferred', value: "Deferred"},
-    {name: 'Transferred', value: "Transferred"},
-    {name: 'Filed', value: "Filed"}
-]
+const CASE_TYPES = [
+  { name: "All case types", value: "all" },
+  { name: "Case type A", value: "caseTypeA" },
+  { name: "Case type B", value: "caseTypeB" },
+  { name: "Case type C", value: "caseTypeC" },
+  { name: "Case type D", value: "caseTypeD" },
+];
 
-export {CASE_STATUSES}
+export { CASE_TYPES };

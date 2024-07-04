@@ -12,8 +12,8 @@ const MainLayout = () => {
             <Sidebar />
             <main className={`mt-16 ${isMinimized ? 'sm:ml-[100px]' : 'sm:ml-[250px]'} sm:mt-0`}>
                 <div className='hidden sm:flex px-5 h-14 justify-end items-center gap-2'>
-                    <Button variant={'ghost'} className='rounded-full bg-white dark:bg-gray-700'><Search size={18} /></Button>
-                    <Button variant={'ghost'} className='rounded-full bg-white dark:bg-gray-700'><Bell size={18} /></Button>
+                    <Button variant={'default'} className='rounded-3xl p-3'><Search size={18} /></Button>
+                    <Button variant={'default'} className='rounded-3xl p-3'><Bell size={18} /></Button>
                 </div>
                 <div className='p-5 sm:px-16'>
                     <Outlet />

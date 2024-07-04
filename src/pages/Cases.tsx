@@ -1,7 +1,7 @@
 import CaseTable from "@/components/custom/CaseTable"
 import { Card, CardHeader, CardContent, CardTitle } from "@/components/ui/card"
-import {useEffect, useState} from "react";
-import {fetchCaseTypes} from "@/services/dashboard/dashboard.service.ts";
+import { useEffect, useState } from "react";
+import { fetchCaseTypes } from "@/services/dashboard/dashboard.service.ts";
 
 const Cases = () => {
 
@@ -10,8 +10,8 @@ const Cases = () => {
 
     useEffect(() => {
         fetchCaseTypes()
-            .then(({data: {data}}) => {
-                setCaseTypes(data.map(d => ({name: d.caseType, value: d.value})))
+            .then(({ data: { data } }) => {
+                setCaseTypes(data.map(d => ({ name: d.caseType, value: d.value })))
             })
             .catch(error => {
                 console.log(error)
@@ -20,7 +20,7 @@ const Cases = () => {
     }, []);
 
     return (
-        <Card className="bg-gray-100 dark:bg-gray-800">
+        <Card className="bg-gray-100">
             <CardHeader>
                 <CardTitle>Case List</CardTitle>
             </CardHeader>

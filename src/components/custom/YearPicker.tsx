@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import {
     Select,
     SelectContent,
@@ -13,7 +13,7 @@ interface IYearPickerProps {
     className?: string
 }
 
-const YearPicker: React.FC<IYearPickerProps> = ({onChange, className}) => {
+const YearPicker: React.FC<IYearPickerProps> = ({ onChange, className }) => {
     const [years, setYears] = useState(generateYears(20));
     const [selectedYear, setSelectedYear] = useState("all");
 
@@ -29,7 +29,7 @@ const YearPicker: React.FC<IYearPickerProps> = ({onChange, className}) => {
     };
 
     const handleScroll = (event: React.UIEvent<HTMLDivElement>) => {
-        const {scrollTop, scrollHeight, clientHeight} = event.target as HTMLElement;
+        const { scrollTop, scrollHeight, clientHeight } = event.target as HTMLElement;
         if (scrollTop + clientHeight >= scrollHeight) {
             loadMoreYears();
         }
@@ -38,8 +38,8 @@ const YearPicker: React.FC<IYearPickerProps> = ({onChange, className}) => {
     return (
 
         <Select value={selectedYear} onValueChange={handleValueChange}>
-            <SelectTrigger className={`w-1/3 bg-gray-100 dark:bg-gray-700 border-none rounded-none ${className}`}>
-                <SelectValue placeholder="All Time"/>
+            <SelectTrigger className={`w-1/3 rounded-3xl bg-gray-100 dark:bg-primary/10 border-none ${className}`}>
+                <SelectValue placeholder="All Time" />
             </SelectTrigger>
             <SelectContent onScroll={handleScroll}>
                 <SelectGroup>
@@ -58,7 +58,7 @@ const YearPicker: React.FC<IYearPickerProps> = ({onChange, className}) => {
 };
 
 const generateYears = (count: number, startYear = new Date().getFullYear()) => {
-    return Array.from({length: count}, (_, i) => startYear - i);
+    return Array.from({ length: count }, (_, i) => startYear - i);
 };
 
 export default YearPicker;

@@ -15,20 +15,17 @@ const Invites = () => {
 
     return (
         <>
-            <div className='flex flex-col gap-2'>
-                <Card className="bg-gray-100 dark:bg-gray-800">
-                    <CardHeader>
-                        <div className='flex flex-row justify-between items-end'>
-                            <CardTitle>Invited Users</CardTitle>
-                            <Button variant={'default'} className='flex flex-row gap-3 justify-between items-end' onClick={toggleDialog}><UserPlus className='w-5 h-5' />Invite a user</Button>
-                        </div>
-                    </CardHeader>
-                    <CardContent>
-                        <UserTable />
-                    </CardContent>
-                </Card>
-
-            </div>
+            <Card className="bg-gray-100">
+                <CardHeader>
+                    <div className='flex flex-row justify-between items-end'>
+                        <CardTitle>Invited Users</CardTitle>
+                        <Button variant={'default'} className='flex flex-row gap-3 justify-between items-end' onClick={toggleDialog}><UserPlus className='w-5 h-5' />Invite a user</Button>
+                    </div>
+                </CardHeader>
+                <CardContent>
+                    <UserTable />
+                </CardContent>
+            </Card>
             <InviteDialog open={open} toggle={toggleDialog} />
         </>
     )

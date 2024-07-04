@@ -42,7 +42,7 @@ export function SidebarDesktop(props: SidebarDesktopProps) {
                                 <SidebarButton
                                     variant={pathname === link.href ? 'secondary' : 'ghost'}
                                     icon={link.icon}
-                                    className='w-full'
+                                    className={`w-full rounded-md hover:bg-green-600/10 ${pathname === link.href && 'bg-green-600/10'}`}
                                     isShowLable={!isMinimized}
                                 >
                                     {link.label}

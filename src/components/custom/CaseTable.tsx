@@ -6,78 +6,61 @@ import { Checkbox } from '../ui/checkbox';
 import { DropSelect } from './DropSelect';
 import { ToggleGroup, ToggleGroupItem } from '../ui/toggle-group';
 import { Pagination, PaginationContent, PaginationItem, PaginationPrevious, PaginationLink, PaginationEllipsis, PaginationNext } from '../ui/pagination';
-import { RadioGroup, RadioItem } from "@/components/ui/radio.tsx";
+import { Button } from '../ui/button';
+import { Download, FileSearch2 } from 'lucide-react';
+import { Input } from '../ui/input';
 
 interface ICase {
     select?: null;
-    name: string;
-    contractSignedDate: string;
-    dateOfDeath: string;
-    coCounsel: string;
-    status: 'Complete' | 'Incomplete';
-    handlingFirm: string;
+    fileName: string;
+    updatedDate: string;
+    caseTag: 'Negative' | 'Positive';
     caseType: string;
-    createdDate: string;
-    closedDate?: string;
+    tagDetails: string[];
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    actions?: any
 }
 
 const data: ICase[] = [
     {
         select: null,
-        name: 'MAT-2210275',
-        contractSignedDate: '2022-10-19',
-        dateOfDeath: '2018-03-01 00:30:00',
-        coCounsel: 'Dianne Russell',
-        status: 'Incomplete',
-        handlingFirm: 'WLF',
+        fileName: 'MAT-2210275.pdf',
+        updatedDate: '2022-10-19',
+        caseTag: 'Positive',
         caseType: 'Case type A',
-        createdDate: '2018-03-01 00:30:00',
-        closedDate: '2022-10-19',
+        tagDetails: ['Criminal', 'Civil', 'Family', 'Property', 'Corporate', 'Others']
     },
     {
         select: null,
-        name: 'MAT-2210275',
-        contractSignedDate: '2022-10-19',
-        dateOfDeath: '2018-03-01 00:30:00',
-        coCounsel: 'Dianne Russell',
-        status: 'Complete',
-        handlingFirm: 'WLF',
+        fileName: 'MAT-2210275.pdf',
+        updatedDate: '2022-10-19',
+        caseTag: 'Negative',
         caseType: 'Case type B',
-        createdDate: '2018-03-01 00:30:00',
+        tagDetails: ['Criminal', 'Civil', 'Family', 'Property', 'Corporate', 'Others']
     },
     {
         select: null,
-        name: 'MAT-2210275',
-        contractSignedDate: '2022-10-19',
-        dateOfDeath: '2018-03-01 00:30:00',
-        coCounsel: 'Dianne Russell',
-        status: 'Complete',
-        handlingFirm: 'WLF',
+        fileName: 'MAT-2210275.pdf',
+        updatedDate: '2022-10-19',
+        caseTag: 'Negative',
         caseType: 'Case type C',
-        createdDate: '2018-03-01 00:30:00',
+        tagDetails: ['Criminal', 'Civil', 'Family', 'Property', 'Corporate', 'Others']
     },
     {
         select: null,
-        name: 'MAT-2210275',
-        contractSignedDate: '2022-10-19',
-        dateOfDeath: '2018-03-01 00:30:00',
-        coCounsel: 'Dianne Russell',
-        status: 'Incomplete',
-        handlingFirm: 'WLF',
+        fileName: 'MAT-2210275.pdf',
+        updatedDate: '2022-10-19',
+        caseTag: 'Negative',
         caseType: 'Case type D',
-        createdDate: '2018-03-01 00:30:00',
-        closedDate: '2022-10-19',
+        tagDetails: ['Criminal', 'Civil', 'Family']
     },
     {
         select: null,
-        name: 'MAT-2210275',
-        contractSignedDate: '2022-10-19',
-        dateOfDeath: '2018-03-01 00:30:00',
-        coCounsel: 'Dianne Russell',
-        status: 'Complete',
-        handlingFirm: 'WLF',
+        fileName: 'MAT-2210275.pdf',
+        updatedDate: '2022-10-19',
+        caseTag: 'Positive',
         caseType: 'Case type E',
-        createdDate: '2018-03-01 00:30:00',
+        tagDetails: ['Property', 'Corporate', 'Others']
     },
 ];
 
@@ -105,39 +88,13 @@ const columns = [
         enableSorting: false,
         enableHiding: false,
     }),
-    columnHelper.accessor('name', {
-        header: () => 'Name',
+    columnHelper.accessor('fileName', {
+        header: () => 'File Name',
         cell: info => info.renderValue(),
         footer: info => info.column.id,
     }),
-    columnHelper.accessor('contractSignedDate', {
-        header: () => 'Contract signed date',
-        cell: info => info.renderValue(),
-        footer: info => info.column.id,
-    }),
-    columnHelper.accessor('dateOfDeath', {
-        header: () => 'Date of Death',
-        cell: info => info.renderValue(),
-        footer: info => info.column.id,
-    }),
-    columnHelper.accessor('coCounsel', {
-        header: () => 'Co-Counsel',
-        cell: info => info.renderValue(),
-        footer: info => info.column.id,
-    }),
-    columnHelper.accessor('status', {
-        header: () => 'Status',
-        cell: ({ row }) => {
-            const status: string = row.getValue("status")
-            const statusClass =
-                status === "Incomplete" ? "bg-blue-800 text-white" : "bg-amber-500 text-white"
-            return <span className={`px-4 py-1 ${statusClass}`}>{status}</span>
-        },
-
-        footer: info => info.column.id,
-    }),
-    columnHelper.accessor('handlingFirm', {
-        header: () => 'Handling firm',
+    columnHelper.accessor('updatedDate', {
+        header: () => 'Updated Date',
         cell: info => info.renderValue(),
         footer: info => info.column.id,
     }),
@@ -146,14 +103,38 @@ const columns = [
         cell: info => info.renderValue(),
         footer: info => info.column.id,
     }),
-    columnHelper.accessor('createdDate', {
-        header: () => 'Created date',
-        cell: info => info.renderValue(),
+    columnHelper.accessor('caseTag', {
+        header: () => 'Case Tag',
+        cell: ({ row }) => {
+            const status: string = row.getValue("caseTag")
+            const statusClass =
+                status === "Positive" ? "bg-green-600/10 text-green-600" : "bg-red-400/10 text-red-400"
+            return <span className={`px-4 py-1 rounded-3xl ${statusClass}`}>{status}</span>
+        },
+
         footer: info => info.column.id,
     }),
-    columnHelper.accessor('closedDate', {
-        header: () => 'Closed date',
-        cell: info => info.renderValue(),
+    columnHelper.accessor('tagDetails', {
+        header: () => 'Tag Details',
+        cell: ({ row }) => {
+            const tagDetails: string[] = row.getValue("tagDetails")
+
+            return tagDetails.map((tag, index) =>
+                <span key={index} className={`mr-1 px-4 py-1 rounded-3xl bg-gray-600/10`}>{tag}</span>
+            )
+        },
+
+        footer: info => info.column.id,
+    }),
+
+    columnHelper.accessor('actions', {
+        header: () => 'Actions',
+        cell: () => {
+            return <div className={`flex flex-row justify-end`}>
+                <Button className="mr-2" variant='ghost' size='sm'><FileSearch2 /></Button>
+                <Button variant='ghost' size='sm'><Download /></Button>
+            </div>
+        },
         footer: info => info.column.id,
     }),
 ];
@@ -174,25 +155,27 @@ const CaseTable: React.FC<TCaseTable> = ({ caseTypes }) => {
             <div className="flex flex-col sm:flex-row justify-between items-center mb-4 gap-2">
                 <div className="space-x-2">
                     <ToggleGroup type="single" className='flex flex-col sm:flex-row'>
-                        <ToggleGroupItem value="a" className='border dark:border-gray-700 rounded-none hover:bg-gray-700 hover:text-white data-[state=on]:bg-gray-700 data-[state=on]:text-white'>All status <span className='bg-white text-black rounded-full ml-2 px-1'>829</span></ToggleGroupItem>
-                        <ToggleGroupItem value="b" className='border dark:border-gray-700 rounded-none hover:bg-amber-500 hover:text-white data-[state=on]:bg-amber-500 data-[state=on]:text-white'>Complete <span className='bg-amber-500 text-white rounded-full ml-2 px-1'>244</span></ToggleGroupItem>
-                        <ToggleGroupItem value="c" className='border dark:border-gray-700 rounded-none hover:bg-blue-800 hover:text-white data-[state=on]:bg-blue-800 data-[state=on]:text-white'>Incomplete <span className='bg-blue-800 text-white rounded-full ml-2 px-1'>673</span></ToggleGroupItem>
+                        <ToggleGroupItem value="a" className='border dark:border-primary/10 rounded-3xl hover:bg-primary/90 hover:text-white data-[state=on]:bg-primary data-[state=on]:text-white'>All status <span className='bg-white text-black rounded-full ml-2 px-1'>829</span></ToggleGroupItem>
+                        <ToggleGroupItem value="b" className='border dark:border-primary/10 rounded-3xl hover:bg-amber-500 hover:text-white data-[state=on]:bg-amber-500 data-[state=on]:text-white'>Complete <span className='bg-amber-500 text-white rounded-full ml-2 px-1'>244</span></ToggleGroupItem>
+                        <ToggleGroupItem value="c" className='border dark:border-primary/10 rounded-3xl hover:bg-blue-800 hover:text-white data-[state=on]:bg-blue-800 data-[state=on]:text-white'>Incomplete <span className='bg-blue-800 text-white rounded-full ml-2 px-1'>673</span></ToggleGroupItem>
                     </ToggleGroup>
                 </div>
                 <div className="flex flex-col sm:flex-row gap-2">
-                    <DropSelect className='bg-white w-full' />
-                    <DropSelect className="bg-white w-[140px] flex-shrink-0" placeHolder="All Cases"
+                    <Input type='search' className="bg-white w-full" placeholder="Search file name.." />
+                    <DropSelect className="bg-white w-[140px] flex-shrink-0" placeHolder="All case type"
                         value={caseTypes[0]?.value}
                         itemList={caseTypes}
                         onChange={(e) => {
                             console.log(e)
                         }}
                     />
-                    <RadioGroup >
-                        <RadioItem value="all" id="all">All time</RadioItem>
-                        <RadioItem value="7d" id="7d">7 days</RadioItem>
-                        <RadioItem value="30d" id="30d">30 days</RadioItem>
-                    </RadioGroup>
+                    <DropSelect className="bg-white w-[140px] flex-shrink-0" placeHolder="Filter by date"
+                        value={caseTypes[0]?.value}
+                        itemList={caseTypes}
+                        onChange={(e) => {
+                            console.log(e)
+                        }}
+                    />
                 </div>
             </div>
             <Table>
