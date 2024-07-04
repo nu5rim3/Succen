@@ -6,38 +6,17 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { FileBarChart, FilePieChart } from "lucide-react"
 import AnimatedNumbers from "react-animated-numbers";
 import YearPicker from "@/components/custom/YearPicker.tsx";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { CASE_TYPES } from "@/lib/constants.ts";
-import { fetchCaseTypes } from "@/services/dashboard/dashboard.service.ts";
 import CreateCaseDialog from "@/components/custom/CreateCaseDialog"
 
 const Dashboard = () => {
-    const [caseTypes, setCaseTypes] = useState<TSelectListType[]>([])
-    const [chartFilters, setChartFilters] = useState({
-        caseType: "all",
-        status: "Pending",
-        year: "all"
-    })
+
     const [openCreate, setOpenCreate] = useState<boolean>(false);
 
     const toggleDialog = () => {
         setOpenCreate(!openCreate);
     }
-
-    useEffect(() => {
-        fetchCaseTypes()
-            .then(({ data: { data } }) => {
-                setCaseTypes(data.map(d => ({ name: d.caseType, value: d.value })))
-            })
-            .catch(error => {
-                console.log(error)
-                setCaseTypes([])
-            })
-    }, []);
-
-    useEffect(() => {
-        console.log({ chartFilters })
-    }, [chartFilters]);
 
     return (
         <div className="flex justify-center flex-col gap-10">
@@ -147,27 +126,9 @@ const Dashboard = () => {
 
                         <div className="flex flex-shrink-0 gap-2">
                             <YearPicker className="bg-white flex-1 w-[130px]"
-                                onChange={(e) => {
-
-                                    setChartFilters(prevState => (
-                                        {
-                                            ...prevState,
-                                            year: e
-                                        }
-                                    ))
-                                }}
                             />
                             <DropSelect className="bg-white flex-1 w-[200px]" placeHolder="All case type" value="all"
                                 itemList={CASE_TYPES}
-                                onChange={(e) => {
-
-                                    setChartFilters(prevState => (
-                                        {
-                                            ...prevState,
-                                            caseType: e
-                                        }
-                                    ))
-                                }}
                             />
                         </div>
                     </div>
@@ -189,7 +150,7 @@ const Dashboard = () => {
                     </div>
                 </CardHeader>
                 <CardContent>
-                    <CaseTable caseTypes={caseTypes} />
+                    <CaseTable />
                 </CardContent>
             </Card>
             <CreateCaseDialog open={openCreate} toggle={toggleDialog} />

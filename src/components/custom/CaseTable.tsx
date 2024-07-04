@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { useReactTable, createColumnHelper, getCoreRowModel, flexRender } from '@tanstack/react-table';
 import 'tailwindcss/tailwind.css';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '../ui/table';
@@ -11,21 +11,19 @@ import { Download, FileSearch2 } from 'lucide-react';
 import { Input } from '../ui/input';
 import PdfViewDialog from './PdfViewDialog';
 
-interface ICase {
+export interface ICase {
     select?: null;
     fileName: string;
     updatedDate: string;
     caseTag: 'Negative' | 'Positive';
     caseType: string;
     tagDetails: string[];
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    actions?: any
 }
 
 const data: ICase[] = [
     {
         select: null,
-        fileName: 'MAT-2210275.pdf',
+        fileName: 'MAT-2210276.pdf',
         updatedDate: '2022-10-19',
         caseTag: 'Positive',
         caseType: 'Case type A',
@@ -33,7 +31,7 @@ const data: ICase[] = [
     },
     {
         select: null,
-        fileName: 'MAT-2210275.pdf',
+        fileName: 'MAT-2210277.pdf',
         updatedDate: '2022-10-19',
         caseTag: 'Negative',
         caseType: 'Case type B',
@@ -41,7 +39,7 @@ const data: ICase[] = [
     },
     {
         select: null,
-        fileName: 'MAT-2210275.pdf',
+        fileName: 'MAT-2210278.pdf',
         updatedDate: '2022-10-19',
         caseTag: 'Negative',
         caseType: 'Case type C',
@@ -49,7 +47,7 @@ const data: ICase[] = [
     },
     {
         select: null,
-        fileName: 'MAT-2210275.pdf',
+        fileName: 'MAT-2210279.pdf',
         updatedDate: '2022-10-19',
         caseTag: 'Negative',
         caseType: 'Case type D',
@@ -57,7 +55,7 @@ const data: ICase[] = [
     },
     {
         select: null,
-        fileName: 'MAT-2210275.pdf',
+        fileName: 'MAT-2210274.pdf',
         updatedDate: '2022-10-19',
         caseTag: 'Positive',
         caseType: 'Case type E',
@@ -67,7 +65,8 @@ const data: ICase[] = [
 
 const columnHelper = createColumnHelper<ICase>()
 
-const columns = [
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const createColumns = (selectedItem: (rowItem: any, action: string) => void) => [
 
     columnHelper.accessor('select', {
         header: ({ table }) => (
@@ -112,7 +111,6 @@ const columns = [
                 status === "Positive" ? "bg-green-600/10 text-green-600" : "bg-red-400/10 text-red-400"
             return <span className={`px-4 py-1 rounded-3xl ${statusClass}`}>{status}</span>
         },
-
         footer: info => info.column.id,
     }),
     columnHelper.accessor('tagDetails', {
@@ -124,27 +122,40 @@ const columns = [
                 <span key={index} className={`mr-1 px-4 py-1 rounded-3xl bg-gray-600/10`}>{tag}</span>
             )
         },
-
         footer: info => info.column.id,
     }),
-
-    columnHelper.accessor('actions', {
+    columnHelper.display({
+        id: 'actions',
         header: () => 'Actions',
-        cell: () => {
+        cell: ({ row }) => {
             return <div className={`flex flex-row justify-end`}>
-                <Button className="mr-2" variant='ghost' size='sm'><FileSearch2 /></Button>
-                <Button variant='ghost' size='sm'><Download /></Button>
+                <Button className="mr-2" variant='ghost' size='sm' onClick={() => selectedItem(row.original, 'VIEW')}><FileSearch2 /></Button>
+                <Button variant='ghost' size='sm' onClick={() => selectedItem(row.original, 'DOWNLOAD')}><Download /></Button>
             </div>
         },
-        footer: info => info.column.id,
     }),
 ];
 
 type TCaseTable = {
-    caseTypes: TSelectListType[]
+    caseTypes?: TSelectListType[]
 }
 
 const CaseTable: React.FC<TCaseTable> = ({ caseTypes }) => {
+
+    const [selectedRowItem, setSelectedRowItem] = useState<ICase | null>(null);
+
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const selectedItem = (rowItem: any, action: string) => {
+        if (action === 'VIEW') {
+            setSelectedRowItem(rowItem);
+            setPdfViewOpen(!pdfViewOpen);
+        } else if (action === 'DOWNLOAD') {
+            window.open('https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf', '_blank');
+        }
+    }
+
+    const columns = createColumns(selectedItem);
+
     const table = useReactTable({
         data,
         columns,
@@ -153,9 +164,18 @@ const CaseTable: React.FC<TCaseTable> = ({ caseTypes }) => {
 
     const [pdfViewOpen, setPdfViewOpen] = useState(false);
 
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     const toggleDialog = () => {
         setPdfViewOpen(!pdfViewOpen);
     }
+
+    const memoizedPdfViewDialog = useMemo(() => {
+        if (selectedRowItem !== null) {
+            return <PdfViewDialog open={pdfViewOpen} toggle={toggleDialog} tableRowDetail={selectedRowItem} />;
+        }
+        return null;
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [pdfViewOpen]);
 
     return (
         <div className="mx-auto p-4">
@@ -170,14 +190,14 @@ const CaseTable: React.FC<TCaseTable> = ({ caseTypes }) => {
                 <div className="flex flex-col sm:flex-row gap-2">
                     <Input type='search' className="bg-white w-full" placeholder="Search file name.." />
                     <DropSelect className="bg-white w-[140px] flex-shrink-0" placeHolder="All case type"
-                        value={caseTypes[0]?.value}
+                        // value={caseTypes[0]?.value}
                         itemList={caseTypes}
                         onChange={(e) => {
                             console.log(e)
                         }}
                     />
                     <DropSelect className="bg-white w-[140px] flex-shrink-0" placeHolder="Filter by date"
-                        value={caseTypes[0]?.value}
+                        // value={caseTypes[0]?.value}
                         itemList={caseTypes}
                         onChange={(e) => {
                             console.log(e)
@@ -244,7 +264,7 @@ const CaseTable: React.FC<TCaseTable> = ({ caseTypes }) => {
                     </PaginationContent>
                 </Pagination>
             </div>
-            <PdfViewDialog open={pdfViewOpen} toggle={toggleDialog} />
+            {memoizedPdfViewDialog}
         </div>
     );
 };
