@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useReactTable, createColumnHelper, getCoreRowModel, flexRender } from '@tanstack/react-table';
 import 'tailwindcss/tailwind.css';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '../ui/table';
@@ -9,6 +9,7 @@ import { Pagination, PaginationContent, PaginationItem, PaginationPrevious, Pagi
 import { Button } from '../ui/button';
 import { Download, FileSearch2 } from 'lucide-react';
 import { Input } from '../ui/input';
+import PdfViewDialog from './PdfViewDialog';
 
 interface ICase {
     select?: null;
@@ -150,6 +151,12 @@ const CaseTable: React.FC<TCaseTable> = ({ caseTypes }) => {
         getCoreRowModel: getCoreRowModel(),
     });
 
+    const [pdfViewOpen, setPdfViewOpen] = useState(false);
+
+    const toggleDialog = () => {
+        setPdfViewOpen(!pdfViewOpen);
+    }
+
     return (
         <div className="mx-auto p-4">
             <div className="flex flex-col sm:flex-row justify-between items-center mb-4 gap-2">
@@ -236,25 +243,8 @@ const CaseTable: React.FC<TCaseTable> = ({ caseTypes }) => {
                         </PaginationItem>
                     </PaginationContent>
                 </Pagination>
-                {/* <div className="space-x-2">
-                    <Button
-                        className='rounded-none'
-                        size="sm"
-                        onClick={() => table.previousPage()}
-                    // disabled={!table.getCanPreviousPage()}
-                    >
-                        Previous
-                    </Button>
-                    <Button
-                        className='rounded-none'
-                        size="sm"
-                        onClick={() => table.nextPage()}
-                    // disabled={!table.getCanNextPage()}
-                    >
-                        Next
-                    </Button>
-                </div> */}
             </div>
+            <PdfViewDialog open={pdfViewOpen} toggle={toggleDialog} />
         </div>
     );
 };
