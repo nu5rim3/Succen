@@ -53,7 +53,7 @@ const Dashboard = () => {
 
                                 <p className="text-gray-600 mb-2">Total case tags created compared to last year</p>
                             </div>
-                            <Button className="bg-green-600 hover:bg-green-500 dark:bg-green-500">Increase 5.5%</Button>
+                            <Button className="bg-green-600 hover:bg-green-500 dark:bg-green-500 dark:hover:bg-green-600">Increase 5.5%</Button>
                         </div>
 
                     </CardContent>
@@ -80,7 +80,7 @@ const Dashboard = () => {
                                 </h2>
                                 <p className="text-gray-600 mb-2">Total positive tags compared to last year</p>
                             </div>
-                            <Button className="bg-red-400 hover:bg-red-500 dark:bg-red-500">Decrease 5.5%</Button>
+                            <Button className="bg-red-400 hover:bg-red-500 dark:bg-red-500 dark:hover:bg-red-600">Decrease 5.5%</Button>
                         </div>
 
                     </CardContent>
@@ -107,7 +107,7 @@ const Dashboard = () => {
                                 </h2>
                                 <p className="text-gray-600 mb-2">Total negative tags compared to last year</p>
                             </div>
-                            <Button className="bg-green-600 hover:bg-green-500 dark:bg-green-500">Increase 5.5%</Button>
+                            <Button className="bg-green-600 hover:bg-green-500 dark:bg-green-500 dark:hover:bg-green-600">Increase 5.5%</Button>
                         </div>
 
                     </CardContent>

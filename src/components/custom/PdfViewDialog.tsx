@@ -73,9 +73,9 @@ const PdfViewDialog: React.FC<IPdfViewDialogProps> = ({ open, toggle, tableRowDe
                     <Table>
                         <TableHeader>
                             {table.getHeaderGroups().map(headerGroup => (
-                                <TableRow key={headerGroup.id}>
+                                <TableRow key={headerGroup.id} className='border-b border-primary/20'>
                                     {headerGroup.headers.map(header => (
-                                        <TableHead key={header.id} className="px-4 py-2 border-b-1">
+                                        <TableHead key={header.id} className="px-4 py-2">
                                             {header.isPlaceholder
                                                 ? null
                                                 : flexRender(

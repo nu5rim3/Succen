@@ -210,7 +210,7 @@ const CaseTable: React.FC<TCaseTable> = ({ caseTypes }) => {
                     {table.getHeaderGroups().map(headerGroup => (
                         <TableRow key={headerGroup.id}>
                             {headerGroup.headers.map(header => (
-                                <TableHead key={header.id} className="px-4 py-2 border-b-2">
+                                <TableHead key={header.id} className="px-4 py-2 border-b border-primary/20">
                                     {header.isPlaceholder
                                         ? null
                                         : flexRender(
@@ -224,9 +224,9 @@ const CaseTable: React.FC<TCaseTable> = ({ caseTypes }) => {
                 </TableHeader>
                 <TableBody>
                     {table.getRowModel().rows.map(row => (
-                        <TableRow key={row.id} className='hover:bg-white dark:hover:bg-gray-700'>
+                        <TableRow key={row.id} className='hover:bg-white dark:hover:bg-primary/10 border-b border-primary/20'>
                             {row.getVisibleCells().map(cell => (
-                                <TableCell key={cell.id} className={`px-4 py-4 border-b`}>
+                                <TableCell key={cell.id} className={`px-4 py-4`}>
                                     {flexRender(cell.column.columnDef.cell, cell.getContext())}
                                 </TableCell>
                             ))}
