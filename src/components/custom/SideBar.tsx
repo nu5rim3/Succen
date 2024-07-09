@@ -1,12 +1,12 @@
 'use client';
 
 import {
+    Anchor,
     FolderKanban,
     // Bell,
     // Bookmark,
     // Home,
     LayoutDashboard,
-    UserPlus,
     // List,
     // Mail,
     // MoreHorizontal,
@@ -22,8 +22,8 @@ import { SidebarMobile } from './sidebar-mobile';
 const sidebarItems: SidebarItems = {
     links: [
         { label: 'DashBoard', href: '/dashboard', icon: LayoutDashboard },
+        { label: 'Products', href: '/create-product', icon: Anchor },
         { label: 'Cases', href: '/cases', icon: FolderKanban },
-        { label: 'Invites', href: '/invites', icon: UserPlus },
         // { label: 'Messages', href: '/item/messages', icon: Mail },
         // {
         //     href: '/item/lists',

@@ -20,6 +20,7 @@ import { Textarea } from '../ui/textarea';
 
 interface ICreateCaseTypeForm {
     toggle: () => void;
+    action: 'UPDATE' | 'SAVE';
 }
 
 const casesList = [
@@ -30,7 +31,7 @@ const casesList = [
 ];
 
 const formSchema = z.object({
-    caseTypeName: z.string().min(1, { message: 'Enter case type name' }),
+    productName: z.string().min(1, { message: 'Enter case type name' }),
     description: z.string().min(1, { message: 'Enter case type description' }),
     caseTag: z.array(z.string()).nonempty({ message: 'Select at least one case tag' }),
     tagDetails: z.array(z.string()).nonempty({ message: 'Select at least one case tag' })
@@ -38,11 +39,11 @@ const formSchema = z.object({
 
 type UserFormValue = z.infer<typeof formSchema>;
 
-const CreateCaseTypeForm: React.FC<ICreateCaseTypeForm> = ({ toggle }) => {
+const CreateCaseTypeForm: React.FC<ICreateCaseTypeForm> = ({ toggle, action }) => {
     const [selectedCases, setSelectedCases] = useState<string[]>([]);
     const [loading, setLoading] = useState(false);
     const defaultValues = {
-        caseTypeName: '',
+        productName: '',
         description: '',
         caseTag: [],
         tagDetails: [],
@@ -74,14 +75,14 @@ const CreateCaseTypeForm: React.FC<ICreateCaseTypeForm> = ({ toggle }) => {
                 >
                     <FormField
                         control={form.control}
-                        name="caseTypeName"
+                        name="productName"
                         render={({ field }) => (
                             <FormItem>
-                                <FormLabel>Case Tage Name</FormLabel>
+                                <FormLabel>Product Name</FormLabel>
                                 <FormControl>
                                     <Input
                                         type="string"
-                                        placeholder="Enter case type name"
+                                        placeholder="Enter product name"
                                         disabled={loading}
                                         {...field}
                                     />
@@ -153,7 +154,7 @@ const CreateCaseTypeForm: React.FC<ICreateCaseTypeForm> = ({ toggle }) => {
                     <Dialog>
                         <DialogFooter className='pt-3'>
                             <Button variant={'ghost'} disabled={loading} onClick={toggle}>Cancel</Button>
-                            <Button type="submit" disabled={loading} >{loading ? <LoaderCircle className='mr-2 animate-spin' /> : <Check className='mr-2' />} Save</Button>
+                            <Button type="submit" disabled={loading} >{loading ? <LoaderCircle className='mr-2 animate-spin' /> : <Check className='mr-2' />} {action.toUpperCase()}</Button>
                         </DialogFooter>
                     </Dialog>
                 </form>

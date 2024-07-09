@@ -11,7 +11,7 @@ import Loading from './components/custom/Loading';
 import { ThemeProvider } from './context/themeProvider';
 const Dashboard = React.lazy(() => import("./pages/Dashboard"));
 const Cases = React.lazy(() => import("./pages/Cases"));
-const Invites = React.lazy(() => import("./pages/Invites"));
+const CreateProduct = React.lazy(() => import("./pages//CreateProduct"));
 
 function App() {
 
@@ -49,10 +49,10 @@ function App() {
             }
           />
           <Route
-            path="invites/*"
+            path="create-product/*"
             element={
               <React.Suspense fallback={<Loading />}>
-                <Invites />
+                <CreateProduct />
               </React.Suspense>
             }
           />

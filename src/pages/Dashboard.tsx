@@ -153,7 +153,7 @@ const Dashboard = () => {
                     <CaseTable />
                 </CardContent>
             </Card>
-            <CreateCaseDialog open={openCreate} toggle={toggleDialog} />
+            <CreateCaseDialog open={openCreate} toggle={toggleDialog} tableRowDetail={null} />
         </div>
     )
 }

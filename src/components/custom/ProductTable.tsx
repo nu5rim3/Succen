@@ -7,63 +7,57 @@ import { DropSelect } from './DropSelect';
 import { ToggleGroup, ToggleGroupItem } from '../ui/toggle-group';
 import { Pagination, PaginationContent, PaginationItem, PaginationPrevious, PaginationLink, PaginationEllipsis, PaginationNext } from '../ui/pagination';
 import { Button } from '../ui/button';
-import { Download, FileSearch2 } from 'lucide-react';
+import { Edit2Icon } from 'lucide-react';
 import { Input } from '../ui/input';
-import PdfViewDialog from './PdfViewDialog';
+import CreateCaseDialog from './CreateCaseDialog';
 
-export interface ICase {
+export interface IProduct {
     select?: null;
-    fileName: string;
+    productName: string;
     updatedDate: string;
-    caseTag: 'Negative' | 'Positive';
     caseType: string;
     tagDetails: string[];
 }
 
-const data: ICase[] = [
+const data: IProduct[] = [
     {
         select: null,
-        fileName: 'MAT-2210276.pdf',
+        productName: 'coca cola',
         updatedDate: '2022-10-19',
-        caseTag: 'Positive',
         caseType: 'Case type A',
         tagDetails: ['Criminal', 'Civil', 'Family', 'Property', 'Corporate', 'Others']
     },
     {
         select: null,
-        fileName: 'MAT-2210277.pdf',
+        productName: 'peppsi',
         updatedDate: '2022-10-19',
-        caseTag: 'Negative',
         caseType: 'Case type B',
         tagDetails: ['Criminal', 'Civil', 'Family', 'Property', 'Corporate', 'Others']
     },
     {
         select: null,
-        fileName: 'MAT-2210278.pdf',
+        productName: 'pizza hut',
         updatedDate: '2022-10-19',
-        caseTag: 'Negative',
         caseType: 'Case type C',
         tagDetails: ['Criminal', 'Civil', 'Family', 'Property', 'Corporate', 'Others']
     },
     {
         select: null,
-        fileName: 'MAT-2210279.pdf',
+        productName: 'm&m',
         updatedDate: '2022-10-19',
-        caseTag: 'Negative',
         caseType: 'Case type D',
         tagDetails: ['Criminal', 'Civil', 'Family']
     },
     {
         select: null,
-        fileName: 'MAT-2210274.pdf',
+        productName: 'A&G',
         updatedDate: '2022-10-19',
-        caseTag: 'Positive',
         caseType: 'Case type E',
         tagDetails: ['Property', 'Corporate', 'Others']
     },
 ];
 
-const columnHelper = createColumnHelper<ICase>()
+const columnHelper = createColumnHelper<IProduct>()
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const createColumns = (selectedItem: (rowItem: any, action: string) => void) => [
@@ -88,8 +82,8 @@ const createColumns = (selectedItem: (rowItem: any, action: string) => void) => 
         enableSorting: false,
         enableHiding: false,
     }),
-    columnHelper.accessor('fileName', {
-        header: () => 'File Name',
+    columnHelper.accessor('productName', {
+        header: () => 'Product Name',
         cell: info => info.renderValue(),
         footer: info => info.column.id,
     }),
@@ -101,16 +95,6 @@ const createColumns = (selectedItem: (rowItem: any, action: string) => void) => 
     columnHelper.accessor('caseType', {
         header: () => 'Case Type',
         cell: info => info.renderValue(),
-        footer: info => info.column.id,
-    }),
-    columnHelper.accessor('caseTag', {
-        header: () => 'Case Tag',
-        cell: ({ row }) => {
-            const status: string = row.getValue("caseTag")
-            const statusClass =
-                status === "Positive" ? "bg-green-600/10 text-green-600" : "bg-red-400/10 text-red-400"
-            return <span className={`px-4 py-1 rounded-3xl ${statusClass}`}>{status}</span>
-        },
         footer: info => info.column.id,
     }),
     columnHelper.accessor('tagDetails', {
@@ -129,20 +113,20 @@ const createColumns = (selectedItem: (rowItem: any, action: string) => void) => 
         header: () => 'Actions',
         cell: ({ row }) => {
             return <div className={`flex flex-row justify-end`}>
-                <Button className="mr-2" variant='ghost' size='sm' onClick={() => selectedItem(row.original, 'VIEW')}><FileSearch2 /></Button>
-                <Button variant='ghost' size='sm' onClick={() => selectedItem(row.original, 'DOWNLOAD')}><Download /></Button>
+                <Button className="mr-2" variant='ghost' size='sm' onClick={() => selectedItem(row.original, 'VIEW')}><Edit2Icon /></Button>
             </div>
         },
     }),
 ];
 
-type TCaseTable = {
+type TProductTable = {
     caseTypes?: TSelectListType[]
+    toggleEdit?: () => void;
 }
 
-const CaseTable: React.FC<TCaseTable> = ({ caseTypes }) => {
+const ProductTable: React.FC<TProductTable> = ({ caseTypes, toggleEdit }) => {
 
-    const [selectedRowItem, setSelectedRowItem] = useState<ICase | null>(null);
+    const [selectedRowItem, setSelectedRowItem] = useState<IProduct | null>(null);
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const selectedItem = (rowItem: any, action: string) => {
@@ -151,6 +135,8 @@ const CaseTable: React.FC<TCaseTable> = ({ caseTypes }) => {
             setPdfViewOpen(!pdfViewOpen);
         } else if (action === 'DOWNLOAD') {
             window.open('https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf', '_blank');
+        } else if (action === 'EDIT') {
+            toggleEdit && toggleEdit();
         }
     }
 
@@ -169,9 +155,9 @@ const CaseTable: React.FC<TCaseTable> = ({ caseTypes }) => {
         setPdfViewOpen(!pdfViewOpen);
     }
 
-    const memoizedPdfViewDialog = useMemo(() => {
+    const memoizedProductViewDialog = useMemo(() => {
         if (selectedRowItem !== null) {
-            return <PdfViewDialog open={pdfViewOpen} toggle={toggleDialog} tableRowDetail={selectedRowItem} />;
+            return <CreateCaseDialog open={pdfViewOpen} toggle={toggleDialog} tableRowDetail={selectedRowItem} />;
         }
         return null;
         // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -188,7 +174,7 @@ const CaseTable: React.FC<TCaseTable> = ({ caseTypes }) => {
                     </ToggleGroup>
                 </div>
                 <div className="flex flex-col sm:flex-row gap-2">
-                    <Input type='search' className="bg-white w-full" placeholder="Search file name.." />
+                    <Input type='search' className="bg-white w-full" placeholder="Search product name.." />
                     <DropSelect className="bg-white w-[140px] flex-shrink-0" placeHolder="All case type"
                         // value={caseTypes[0]?.value}
                         itemList={caseTypes}
@@ -264,9 +250,9 @@ const CaseTable: React.FC<TCaseTable> = ({ caseTypes }) => {
                     </PaginationContent>
                 </Pagination>
             </div>
-            {memoizedPdfViewDialog}
+            {memoizedProductViewDialog}
         </div>
     );
 };
 
-export default CaseTable;
+export default ProductTable;
